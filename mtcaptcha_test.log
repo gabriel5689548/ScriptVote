@@ -1,0 +1,1395 @@
+2025-07-18 19:48:07,765 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-18 19:48:07,766 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 19:48:07,766 - INFO - Mode headless: False
+2025-07-18 19:48:07,766 - INFO - Configuration du driver Selenium...
+2025-07-18 19:49:25,629 - INFO - Driver Selenium configuré avec succès
+2025-07-18 19:49:25,630 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 19:49:50,159 - ERROR - Aucune sitekey MTCaptcha trouvée sur la page
+2025-07-18 19:49:50,259 - INFO - Driver fermé
+2025-07-18 19:49:50,259 - INFO - === TEST ÉCHOUÉ ===
+2025-07-18 19:51:08,284 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-18 19:51:08,285 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 19:51:08,285 - INFO - Mode headless: False
+2025-07-18 19:51:08,285 - INFO - Configuration du driver Selenium...
+2025-07-18 19:52:07,773 - INFO - Driver Selenium configuré avec succès
+2025-07-18 19:52:07,774 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 19:52:32,592 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-18 19:52:32,593 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-18 19:52:32,843 - ERROR - Erreur lors de la soumission: {'status': 0, 'request': 'ERROR_ZERO_BALANCE', 'error_text': 'Your balance is zero or negative. Please top up your balance.'}
+2025-07-18 19:52:32,930 - INFO - Driver fermé
+2025-07-18 19:52:32,930 - INFO - === TEST ÉCHOUÉ ===
+2025-07-18 23:34:34,187 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-18 23:34:34,188 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:34:34,188 - INFO - Mode headless: False
+2025-07-18 23:34:34,188 - INFO - Configuration du driver Selenium...
+2025-07-18 23:35:27,696 - INFO - Driver Selenium configuré avec succès
+2025-07-18 23:35:27,697 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:35:51,472 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-18 23:35:51,472 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-18 23:35:51,660 - INFO - Captcha soumis avec l'ID: 80149976791
+2025-07-18 23:36:01,790 - INFO - Captcha en cours de résolution...
+2025-07-18 23:36:11,962 - INFO - MTCaptcha résolu avec succès!
+2025-07-18 23:36:11,963 - INFO - Injection de la solution dans la page...
+2025-07-18 23:36:12,021 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-18 23:36:12,094 - INFO - Soumission du formulaire...
+2025-07-18 23:36:13,548 - ERROR - Erreur lors de la soumission: Message: element click intercepted: Element is not clickable at point (307, 1152)
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+0   chromedriver                        0x0000000102dbb55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000102db3454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x00000001029023f8 cxxbridge1$string$len + 90664
+3   chromedriver                        0x000000010294f280 cxxbridge1$string$len + 405680
+4   chromedriver                        0x000000010294d7ec cxxbridge1$string$len + 398876
+5   chromedriver                        0x000000010294b600 cxxbridge1$string$len + 390192
+6   chromedriver                        0x000000010294a9fc cxxbridge1$string$len + 387116
+7   chromedriver                        0x000000010293f530 cxxbridge1$string$len + 340832
+8   chromedriver                        0x000000010293efbc cxxbridge1$string$len + 339436
+9   chromedriver                        0x000000010298ab1c cxxbridge1$string$len + 649548
+10  chromedriver                        0x000000010293da0c cxxbridge1$string$len + 333884
+11  chromedriver                        0x0000000102d7e5e0 cxxbridge1$str$ptr + 2481340
+12  chromedriver                        0x0000000102d81848 cxxbridge1$str$ptr + 2494244
+13  chromedriver                        0x0000000102d5f234 cxxbridge1$str$ptr + 2353424
+14  chromedriver                        0x0000000102d82104 cxxbridge1$str$ptr + 2496480
+15  chromedriver                        0x0000000102d502e4 cxxbridge1$str$ptr + 2292160
+16  chromedriver                        0x0000000102da1ff8 cxxbridge1$str$ptr + 2627284
+17  chromedriver                        0x0000000102da2184 cxxbridge1$str$ptr + 2627680
+18  chromedriver                        0x0000000102db3090 cxxbridge1$str$ptr + 2697068
+19  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+20  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-18 23:36:13,645 - INFO - Driver fermé
+2025-07-18 23:36:13,645 - INFO - === TEST ÉCHOUÉ ===
+2025-07-18 23:39:37,904 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-18 23:39:37,905 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:39:37,905 - INFO - Mode headless: False
+2025-07-18 23:39:37,905 - INFO - Configuration du driver Selenium...
+2025-07-18 23:39:45,853 - INFO - Driver Selenium configuré avec succès
+2025-07-18 23:39:45,854 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:40:07,820 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-18 23:40:07,820 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-18 23:40:08,017 - INFO - Captcha soumis avec l'ID: 80149997905
+2025-07-18 23:40:18,129 - INFO - Captcha en cours de résolution...
+2025-07-18 23:40:28,292 - INFO - Captcha en cours de résolution...
+2025-07-18 23:40:38,412 - INFO - MTCaptcha résolu avec succès!
+2025-07-18 23:40:38,413 - INFO - Injection de la solution dans la page...
+2025-07-18 23:40:38,566 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-18 23:40:38,704 - INFO - Soumission du formulaire...
+2025-07-18 23:40:41,458 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-18 23:40:41,459 - INFO - Vérification du résultat...
+2025-07-18 23:40:46,579 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-18 23:40:46,744 - INFO - Driver fermé
+2025-07-18 23:40:46,744 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-18 23:44:42,449 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-18 23:44:42,449 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:44:42,449 - INFO - Mode headless: False
+2025-07-18 23:44:42,449 - INFO - Configuration du driver Selenium...
+2025-07-18 23:45:35,007 - INFO - Driver Selenium configuré avec succès
+2025-07-18 23:45:35,007 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:45:58,590 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-18 23:45:58,591 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-18 23:45:58,741 - INFO - Captcha soumis avec l'ID: 80150026402
+2025-07-18 23:46:08,849 - INFO - Captcha en cours de résolution...
+2025-07-18 23:46:19,190 - INFO - Captcha en cours de résolution...
+2025-07-18 23:46:29,337 - INFO - MTCaptcha résolu avec succès!
+2025-07-18 23:46:29,338 - INFO - Injection de la solution dans la page...
+2025-07-18 23:46:30,249 - ERROR - Erreur lors de l'injection: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x000000010075b55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000100753454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x00000001002a226c cxxbridge1$string$len + 90268
+3   chromedriver                        0x00000001002e4360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001002e30e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x00000001002defbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x000000010032ab1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x00000001002dda0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x000000010071e5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000100721848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x00000001006ff234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000100722104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x00000001006f02e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000100741ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000100742184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000100753090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-18 23:46:30,361 - INFO - Driver fermé
+2025-07-18 23:46:30,361 - INFO - === TEST ÉCHOUÉ ===
+2025-07-18 23:47:39,475 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-18 23:47:39,476 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:47:39,476 - INFO - Mode headless: False
+2025-07-18 23:47:39,476 - INFO - Configuration du driver Selenium...
+2025-07-18 23:48:32,566 - INFO - Driver Selenium configuré avec succès
+2025-07-18 23:48:32,566 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:48:58,298 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-18 23:48:58,300 - INFO - Tentative de remplissage du pseudonyme...
+2025-07-18 23:53:26,416 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-18 23:53:26,417 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:53:26,417 - INFO - Mode headless: False
+2025-07-18 23:53:26,417 - INFO - Configuration du driver Selenium...
+2025-07-18 23:54:23,883 - INFO - Driver Selenium configuré avec succès
+2025-07-18 23:54:23,883 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-18 23:54:46,828 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-18 23:54:46,829 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-18 23:54:48,537 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-18 23:54:48,537 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-18 23:54:48,916 - INFO - Captcha soumis avec l'ID: 80150072638
+2025-07-18 23:54:59,078 - INFO - Captcha en cours de résolution...
+2025-07-18 23:55:09,213 - INFO - Captcha en cours de résolution...
+2025-07-18 23:55:19,381 - INFO - MTCaptcha résolu avec succès!
+2025-07-18 23:55:19,382 - INFO - Injection de la solution dans la page...
+2025-07-18 23:55:19,818 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-18 23:55:19,865 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-18 23:55:19,908 - INFO - Soumission du formulaire...
+2025-07-18 23:55:22,478 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-18 23:55:22,478 - INFO - Vérification du résultat...
+2025-07-19 00:02:24,982 - INFO - 🚀 LANCEMENT D'UN VOTE IMMÉDIAT
+2025-07-19 00:02:24,983 - INFO - === TENTATIVE DE VOTE #1 ===
+2025-07-19 00:02:24,983 - INFO - Heure: 2025-07-19 00:02:24
+2025-07-19 00:02:24,983 - INFO - Configuration du driver Selenium...
+2025-07-19 00:03:22,118 - INFO - Driver Selenium configuré avec succès
+2025-07-19 00:03:22,119 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:03:43,266 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 00:03:43,266 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 00:03:44,990 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:03:44,991 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 00:03:45,327 - INFO - Captcha soumis avec l'ID: 80150134047
+2025-07-19 00:03:55,481 - INFO - Captcha en cours de résolution...
+2025-07-19 00:04:05,654 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 00:04:05,655 - INFO - Injection de la solution dans la page...
+2025-07-19 00:04:06,376 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:04:06,393 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 00:04:06,451 - INFO - Soumission du formulaire...
+2025-07-19 00:04:09,168 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 00:04:09,168 - INFO - Vérification du résultat...
+2025-07-19 00:04:14,276 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 00:04:14,373 - INFO - Driver fermé
+2025-07-19 00:04:14,374 - INFO - ✅ VOTE #1 RÉUSSI!
+2025-07-19 00:04:14,374 - INFO - 📊 STATISTIQUES:
+2025-07-19 00:04:14,374 - INFO -    - Votes réussis: 1
+2025-07-19 00:04:14,374 - INFO -    - Temps de fonctionnement: 0.0h
+2025-07-19 00:04:14,374 - INFO -    - Moyenne: 32.91 votes/heure
+2025-07-19 00:04:14,374 - INFO - ⏰ Prochain vote programmé à: 2025-07-19 01:34:14
+2025-07-19 00:04:14,375 - INFO - ============================================================
+2025-07-19 00:04:26,509 - INFO - 🤖 DÉMARRAGE DU PLANIFICATEUR AUTO-VOTE
+2025-07-19 00:04:26,510 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:04:26,510 - INFO - Intervalle: 1h30 (90 minutes)
+2025-07-19 00:04:26,510 - INFO - Heure de démarrage: 2025-07-19 00:04:26
+2025-07-19 00:04:26,510 - INFO - Premier vote dans 5 secondes...
+2025-07-19 00:04:31,512 - INFO - === TENTATIVE DE VOTE #1 ===
+2025-07-19 00:04:31,513 - INFO - Heure: 2025-07-19 00:04:31
+2025-07-19 00:04:31,513 - INFO - Configuration du driver Selenium...
+2025-07-19 00:04:37,665 - INFO - Driver Selenium configuré avec succès
+2025-07-19 00:04:37,665 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:04:59,277 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 00:04:59,277 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 00:05:00,869 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:05:00,870 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 00:05:01,031 - INFO - Captcha soumis avec l'ID: 80150140747
+2025-07-19 00:05:11,183 - INFO - Captcha en cours de résolution...
+2025-07-19 00:05:21,322 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 00:05:21,323 - INFO - Injection de la solution dans la page...
+2025-07-19 00:05:21,898 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:05:21,915 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 00:05:21,968 - INFO - Soumission du formulaire...
+2025-07-19 00:05:24,525 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 00:05:24,525 - INFO - Vérification du résultat...
+2025-07-19 00:05:29,626 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 00:05:29,712 - INFO - Driver fermé
+2025-07-19 00:05:29,713 - INFO - ✅ VOTE #1 RÉUSSI!
+2025-07-19 00:05:29,713 - INFO - 📊 STATISTIQUES:
+2025-07-19 00:05:29,713 - INFO -    - Votes réussis: 1
+2025-07-19 00:05:29,713 - INFO -    - Temps de fonctionnement: 0.0h
+2025-07-19 00:05:29,713 - INFO -    - Moyenne: 56.96 votes/heure
+2025-07-19 00:05:29,713 - INFO - ⏰ Prochain vote programmé à: 2025-07-19 01:35:29
+2025-07-19 00:05:29,713 - INFO - ============================================================
+2025-07-19 00:05:29,713 - INFO - 🔄 PLANIFICATEUR ACTIF - Votes automatiques toutes les 1h30
+2025-07-19 00:05:29,713 - INFO - Appuyez sur Ctrl+C pour arrêter
+2025-07-19 00:09:43,170 - INFO - 🚀 LANCEMENT D'UN VOTE IMMÉDIAT
+2025-07-19 00:09:43,171 - INFO - === TENTATIVE DE VOTE #1 ===
+2025-07-19 00:09:43,171 - INFO - Heure: 2025-07-19 00:09:43
+2025-07-19 00:09:43,171 - INFO - Configuration du driver Selenium...
+2025-07-19 00:10:37,464 - INFO - Driver Selenium configuré avec succès
+2025-07-19 00:10:37,464 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:10:59,747 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 00:10:59,748 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 00:11:01,519 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:11:01,519 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 00:11:01,792 - INFO - Captcha soumis avec l'ID: 80150172377
+2025-07-19 00:11:11,886 - INFO - Captcha en cours de résolution...
+2025-07-19 00:11:22,074 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 00:11:22,074 - INFO - Injection de la solution dans la page...
+2025-07-19 00:11:22,563 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:11:22,578 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 00:11:22,607 - INFO - Soumission du formulaire...
+2025-07-19 00:11:25,143 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 00:11:25,143 - INFO - Vérification du résultat...
+2025-07-19 00:11:30,243 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 00:11:30,332 - INFO - Driver fermé
+2025-07-19 00:11:30,332 - INFO - ✅ VOTE #1 RÉUSSI!
+2025-07-19 00:11:30,332 - INFO - 📊 STATISTIQUES:
+2025-07-19 00:11:30,332 - INFO -    - Votes réussis: 1
+2025-07-19 00:11:30,333 - INFO -    - Temps de fonctionnement: 0.0h
+2025-07-19 00:11:30,333 - INFO -    - Moyenne: 33.59 votes/heure
+2025-07-19 00:11:30,333 - INFO - ⏰ Prochain vote programmé à: 2025-07-19 01:41:30
+2025-07-19 00:11:30,333 - INFO - ============================================================
+2025-07-19 00:28:48,849 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 00:28:48,850 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:28:48,850 - INFO - Mode headless: False
+2025-07-19 00:28:48,850 - INFO - Configuration du driver Selenium...
+2025-07-19 00:29:42,281 - INFO - Driver Selenium configuré avec succès
+2025-07-19 00:29:42,281 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:30:05,144 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 00:30:05,144 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 00:30:06,886 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:30:06,886 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 00:30:07,051 - INFO - Captcha soumis avec l'ID: 80150271337
+2025-07-19 00:30:17,159 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 00:30:17,160 - INFO - Injection de la solution dans la page...
+2025-07-19 00:30:17,712 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:30:17,724 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 00:30:17,755 - INFO - Soumission du formulaire...
+2025-07-19 00:30:20,315 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 00:30:20,315 - INFO - Vérification du résultat...
+2025-07-19 00:30:25,417 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 00:30:25,566 - INFO - Driver fermé
+2025-07-19 00:30:25,566 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-19 00:31:22,260 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 00:31:22,261 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:31:22,261 - INFO - Mode headless: False
+2025-07-19 00:31:22,261 - INFO - Configuration du driver Selenium...
+2025-07-19 00:31:28,632 - INFO - Driver Selenium configuré avec succès
+2025-07-19 00:31:28,633 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:31:51,829 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 00:31:51,829 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 00:31:53,449 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:31:53,450 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 00:31:53,629 - INFO - Captcha soumis avec l'ID: 80150280361
+2025-07-19 00:32:03,718 - INFO - Captcha en cours de résolution...
+2025-07-19 00:32:13,825 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 00:32:13,825 - INFO - Injection de la solution dans la page...
+2025-07-19 00:32:13,970 - INFO - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x00000001047d755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x00000001047cf454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x000000010431e26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104360360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x000000010435f0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x000000010435afbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x00000001043a6b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000104359a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x000000010479a5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x000000010479d848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x000000010477b234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x000000010479e104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x000000010476c2e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x00000001047bdff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x00000001047be184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x00000001047cf090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 00:32:13,982 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 00:32:14,012 - INFO - Soumission du formulaire...
+2025-07-19 00:32:16,733 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 00:32:16,733 - INFO - Vérification du résultat...
+2025-07-19 00:32:21,972 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 00:32:22,364 - INFO - Driver fermé
+2025-07-19 00:32:22,364 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-19 00:33:00,590 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 00:33:00,591 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:33:00,591 - INFO - Mode headless: False
+2025-07-19 00:33:00,591 - INFO - Configuration du driver Selenium...
+2025-07-19 00:33:07,043 - INFO - Driver Selenium configuré avec succès
+2025-07-19 00:33:07,043 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:33:30,503 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 00:33:30,503 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 00:33:32,170 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:33:32,170 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 00:33:32,332 - INFO - Captcha soumis avec l'ID: 80150288541
+2025-07-19 00:33:42,433 - INFO - Captcha en cours de résolution...
+2025-07-19 00:33:52,576 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 00:33:52,576 - INFO - Injection de la solution dans la page...
+2025-07-19 00:33:52,785 - INFO - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000102deb55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000102de3454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x000000010293226c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102974360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001029730e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x000000010296efbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x00000001029bab1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x000000010296da0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000102dae5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000102db1848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000102d8f234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000102db2104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000102d802e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000102dd1ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000102dd2184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000102de3090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 00:33:52,803 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 00:33:52,835 - INFO - Soumission du formulaire...
+2025-07-19 00:33:55,515 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 00:33:55,515 - INFO - Vérification du résultat...
+2025-07-19 00:34:00,633 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 00:34:00,750 - INFO - Driver fermé
+2025-07-19 00:34:00,750 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-19 00:38:24,426 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 00:38:24,427 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:38:24,427 - INFO - Mode headless: False
+2025-07-19 00:38:24,427 - INFO - Configuration du driver Selenium...
+2025-07-19 00:38:31,497 - INFO - Driver Selenium configuré avec succès
+2025-07-19 00:38:31,497 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 00:38:55,264 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 00:38:55,267 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 00:38:57,004 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 00:38:57,005 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 00:38:57,200 - INFO - Captcha soumis avec l'ID: 80150317608
+2025-07-19 00:39:07,347 - INFO - Captcha en cours de résolution...
+2025-07-19 00:39:17,478 - INFO - Captcha en cours de résolution...
+2025-07-19 00:39:27,589 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 00:39:27,590 - INFO - Injection de la solution dans la page...
+2025-07-19 00:39:30,884 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x000000010536355c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x000000010535b454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000104eaa26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104eec360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000104eeb0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000104ee6fbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000104f32b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000104ee5a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x00000001053265e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000105329848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000105307234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x000000010532a104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x00000001052f82e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000105349ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x000000010534a184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x000000010535b090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 00:39:30,888 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 00:39:30,943 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 00:39:30,977 - INFO - Soumission du formulaire...
+2025-07-19 00:39:33,719 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 00:39:33,719 - INFO - Vérification du résultat...
+2025-07-19 00:39:39,103 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 31 minutes 7 secondes.'
+2025-07-19 00:39:39,104 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 31 minutes 7 secondes.'
+2025-07-19 00:39:39,223 - INFO - Driver fermé
+2025-07-19 00:39:39,223 - INFO - === TEST ÉCHOUÉ ===
+2025-07-19 01:44:27,499 - INFO - === TENTATIVE DE VOTE #2 ===
+2025-07-19 01:44:27,506 - INFO - Heure: 2025-07-19 01:44:27
+2025-07-19 01:44:27,507 - INFO - Configuration du driver Selenium...
+2025-07-19 02:44:13,169 - INFO - Driver Selenium configuré avec succès
+2025-07-19 02:44:13,171 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 03:10:54,517 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 03:10:54,517 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 03:10:56,237 - INFO - Pseudonyme 'zCapsLock' saisi dans: input[name='username']
+2025-07-19 03:10:56,237 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 03:11:00,494 - INFO - Captcha soumis avec l'ID: 80151131425
+2025-07-19 03:11:10,683 - INFO - Captcha en cours de résolution...
+2025-07-19 03:27:35,031 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 03:27:35,033 - INFO - Injection de la solution dans la page...
+2025-07-19 03:27:35,691 - INFO - Pseudonyme 'zCapsLock' saisi dans: input[name='username']
+2025-07-19 03:27:35,716 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 03:27:35,753 - INFO - Soumission du formulaire...
+2025-07-19 03:27:36,982 - INFO - Tentative de soumission via JavaScript...
+2025-07-19 03:27:36,982 - ERROR - Erreur lors de la soumission: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+0   chromedriver                        0x00000001048bf55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x00000001048b7454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x000000010440626c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104440ed0 cxxbridge1$string$len + 331008
+4   chromedriver                        0x00000001044694c8 cxxbridge1$string$len + 496376
+5   chromedriver                        0x00000001044687d0 cxxbridge1$string$len + 493056
+6   chromedriver                        0x00000001043d53d4 chromedriver + 86996
+7   chromedriver                        0x00000001048825e0 cxxbridge1$str$ptr + 2481340
+8   chromedriver                        0x0000000104885848 cxxbridge1$str$ptr + 2494244
+9   chromedriver                        0x0000000104863234 cxxbridge1$str$ptr + 2353424
+10  chromedriver                        0x0000000104886104 cxxbridge1$str$ptr + 2496480
+11  chromedriver                        0x00000001048542e4 cxxbridge1$str$ptr + 2292160
+12  chromedriver                        0x00000001043d3664 chromedriver + 79460
+13  dyld                                0x0000000185046b98 start + 6076
+
+2025-07-19 03:27:36,996 - INFO - Driver fermé
+2025-07-19 03:27:36,996 - ERROR - ❌ VOTE #2 ÉCHOUÉ
+2025-07-19 03:27:36,997 - INFO - ⏰ Prochain vote programmé à: 2025-07-19 04:57:36
+2025-07-19 03:27:36,997 - INFO - ============================================================
+2025-07-19 05:22:21,888 - INFO - === TENTATIVE DE VOTE #3 ===
+2025-07-19 05:22:21,893 - INFO - Heure: 2025-07-19 05:22:21
+2025-07-19 05:22:21,893 - INFO - Configuration du driver Selenium...
+2025-07-19 06:46:03,875 - INFO - Driver Selenium configuré avec succès
+2025-07-19 06:46:03,885 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 07:08:08,418 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 07:08:08,423 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 07:23:45,581 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 07:23:45,582 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 07:23:46,227 - INFO - Captcha soumis avec l'ID: 80152245258
+2025-07-19 07:23:58,256 - INFO - Captcha en cours de résolution...
+2025-07-19 07:24:08,378 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 07:24:08,381 - INFO - Injection de la solution dans la page...
+2025-07-19 07:24:10,450 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 07:24:10,601 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 07:24:11,204 - INFO - Soumission du formulaire...
+2025-07-19 07:24:14,955 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 07:24:14,956 - INFO - Vérification du résultat...
+2025-07-19 07:41:03,102 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 07:41:03,288 - INFO - Driver fermé
+2025-07-19 07:41:03,289 - INFO - ✅ VOTE #3 RÉUSSI!
+2025-07-19 07:41:03,289 - INFO - 📊 STATISTIQUES:
+2025-07-19 07:41:03,289 - INFO -    - Votes réussis: 3
+2025-07-19 07:41:03,290 - INFO -    - Temps de fonctionnement: 7.6h
+2025-07-19 07:41:03,290 - INFO -    - Moyenne: 0.39 votes/heure
+2025-07-19 07:41:03,290 - INFO - ⏰ Prochain vote programmé à: 2025-07-19 09:11:03
+2025-07-19 07:41:03,290 - INFO - ============================================================
+2025-07-19 09:20:43,437 - INFO - === TENTATIVE DE VOTE #4 ===
+2025-07-19 09:20:43,448 - INFO - Heure: 2025-07-19 09:20:43
+2025-07-19 09:20:43,448 - INFO - Configuration du driver Selenium...
+2025-07-19 09:20:54,981 - INFO - Driver Selenium configuré avec succès
+2025-07-19 09:20:54,982 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 09:21:19,374 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 09:21:19,376 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 09:21:20,993 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 09:21:20,993 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 09:21:21,176 - INFO - Captcha soumis avec l'ID: 80152751302
+2025-07-19 09:21:31,292 - INFO - Captcha en cours de résolution...
+2025-07-19 09:21:41,394 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 09:21:41,395 - INFO - Injection de la solution dans la page...
+2025-07-19 09:21:41,897 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 09:21:41,929 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 09:21:41,958 - INFO - Soumission du formulaire...
+2025-07-19 09:21:44,642 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 09:21:44,643 - INFO - Vérification du résultat...
+2025-07-19 09:21:49,752 - INFO - Résultat final: ✅ SUCCÈS - Indicateur détecté: 'success'
+2025-07-19 09:21:49,854 - INFO - Driver fermé
+2025-07-19 09:21:49,854 - INFO - ✅ VOTE #4 RÉUSSI!
+2025-07-19 09:21:49,854 - INFO - 📊 STATISTIQUES:
+2025-07-19 09:21:49,854 - INFO -    - Votes réussis: 4
+2025-07-19 09:21:49,855 - INFO -    - Temps de fonctionnement: 9.3h
+2025-07-19 09:21:49,855 - INFO -    - Moyenne: 0.43 votes/heure
+2025-07-19 09:21:49,855 - INFO - ⏰ Prochain vote programmé à: 2025-07-19 10:51:49
+2025-07-19 09:21:49,855 - INFO - ============================================================
+2025-07-19 09:24:56,803 - INFO - 🚀 LANCEMENT D'UN VOTE IMMÉDIAT
+2025-07-19 09:24:56,804 - INFO - === TENTATIVE DE VOTE #1 ===
+2025-07-19 09:24:56,804 - INFO - Heure: 2025-07-19 09:24:56
+2025-07-19 09:24:56,804 - INFO - Configuration du driver Selenium...
+2025-07-19 09:25:04,072 - INFO - Driver Selenium configuré avec succès
+2025-07-19 09:25:04,072 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 09:25:25,781 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 09:25:25,781 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 09:25:28,029 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 09:25:28,029 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 09:25:28,167 - INFO - Captcha soumis avec l'ID: 80152766818
+2025-07-19 09:25:38,320 - INFO - Captcha en cours de résolution...
+2025-07-19 09:25:48,441 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 09:25:48,441 - INFO - Injection de la solution dans la page...
+2025-07-19 09:25:51,748 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000102f4755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000102f3f454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000102a8e26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102ad0360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000102acf0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000102acafbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000102b16b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000102ac9a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000102f0a5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000102f0d848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000102eeb234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000102f0e104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000102edc2e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000102f2dff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000102f2e184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000102f3f090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 09:25:51,753 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 09:25:51,823 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 09:25:51,866 - INFO - Soumission du formulaire...
+2025-07-19 09:25:54,598 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 09:25:54,598 - INFO - Vérification du résultat...
+2025-07-19 09:25:59,999 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 25 minutes 49 secondes.'
+2025-07-19 09:26:00,000 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 25 minutes 49 secondes.'
+2025-07-19 09:26:00,106 - INFO - Driver fermé
+2025-07-19 09:26:00,106 - ERROR - ❌ VOTE #1 ÉCHOUÉ
+2025-07-19 09:26:00,108 - INFO - 🕒 Cooldown extrait: 31 minutes
+2025-07-19 09:26:00,109 - INFO - ⏰ Cooldown détecté: 31 min. Prochain vote à: 2025-07-19 09:59:00
+2025-07-19 09:26:00,109 - INFO - ============================================================
+2025-07-19 09:27:22,048 - INFO - 🤖 DÉMARRAGE DU PLANIFICATEUR AUTO-VOTE
+2025-07-19 09:27:22,049 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 09:27:22,049 - INFO - Intervalle: 1h30 (90 minutes)
+2025-07-19 09:27:22,049 - INFO - Heure de démarrage: 2025-07-19 09:27:22
+2025-07-19 09:27:22,049 - INFO - Premier vote dans 5 secondes...
+2025-07-19 09:27:27,053 - INFO - === TENTATIVE DE VOTE #1 ===
+2025-07-19 09:27:27,053 - INFO - Heure: 2025-07-19 09:27:27
+2025-07-19 09:27:27,053 - INFO - Configuration du driver Selenium...
+2025-07-19 09:27:33,403 - INFO - Driver Selenium configuré avec succès
+2025-07-19 09:27:33,404 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 09:27:54,508 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 09:27:54,510 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 09:27:56,577 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 09:27:56,578 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 09:27:56,723 - INFO - Captcha soumis avec l'ID: 80152775920
+2025-07-19 09:28:06,856 - INFO - Captcha en cours de résolution...
+2025-07-19 09:28:16,952 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 09:28:16,953 - INFO - Injection de la solution dans la page...
+2025-07-19 09:28:20,219 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x000000010507f55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000105077454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000104bc626c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104c08360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000104c070e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000104c02fbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000104c4eb1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000104c01a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x00000001050425e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000105045848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000105023234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000105046104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x00000001050142e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000105065ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000105066184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000105077090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 09:28:20,248 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 09:28:20,260 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 09:28:20,380 - INFO - Soumission du formulaire...
+2025-07-19 09:28:22,969 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 09:28:22,969 - INFO - Vérification du résultat...
+2025-07-19 09:28:28,349 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 23 minutes 21 secondes.'
+2025-07-19 09:28:28,349 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 23 minutes 21 secondes.'
+2025-07-19 09:28:28,463 - INFO - Driver fermé
+2025-07-19 09:28:28,463 - ERROR - ❌ VOTE #1 ÉCHOUÉ
+2025-07-19 09:28:28,465 - INFO - 🕒 Cooldown extrait: 31 minutes
+2025-07-19 09:28:28,465 - INFO - ⏰ Cooldown détecté: 31 min. Prochain vote à: 2025-07-19 10:01:28
+2025-07-19 09:28:28,466 - INFO - ============================================================
+2025-07-19 09:28:28,466 - INFO - 🔄 PLANIFICATEUR ACTIF - Votes automatiques toutes les 1h30
+2025-07-19 09:28:28,466 - INFO - Appuyez sur Ctrl+C pour arrêter
+2025-07-19 09:28:42,920 - INFO - 🚀 LANCEMENT D'UN VOTE IMMÉDIAT
+2025-07-19 09:28:42,921 - INFO - === TENTATIVE DE VOTE #1 ===
+2025-07-19 09:28:42,921 - INFO - Heure: 2025-07-19 09:28:42
+2025-07-19 09:28:42,921 - INFO - Configuration du driver Selenium...
+2025-07-19 09:28:49,086 - INFO - Driver Selenium configuré avec succès
+2025-07-19 09:28:49,087 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 09:29:12,536 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 09:29:12,537 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 09:29:14,391 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 09:29:14,391 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 09:29:14,585 - INFO - Captcha soumis avec l'ID: 80152780570
+2025-07-19 09:29:24,696 - INFO - Captcha en cours de résolution...
+2025-07-19 09:29:34,819 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 09:29:34,819 - INFO - Injection de la solution dans la page...
+2025-07-19 09:29:37,997 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000100cab55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000100ca3454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x00000001007f226c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000100834360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001008330e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x000000010082efbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x000000010087ab1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x000000010082da0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000100c6e5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000100c71848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000100c4f234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000100c72104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000100c402e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000100c91ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000100c92184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000100ca3090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 09:29:38,002 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 09:29:38,013 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 09:29:38,102 - INFO - Soumission du formulaire...
+2025-07-19 09:29:40,812 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 09:29:40,812 - INFO - Vérification du résultat...
+2025-07-19 09:29:46,133 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 22 minutes 3 secondes.'
+2025-07-19 09:29:46,133 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 22 minutes 3 secondes.'
+2025-07-19 09:29:46,242 - INFO - Driver fermé
+2025-07-19 09:29:46,242 - ERROR - ❌ VOTE #1 ÉCHOUÉ
+2025-07-19 09:29:46,244 - INFO - 🕒 Cooldown extrait: 1h 25min 49s = 86 minutes
+2025-07-19 09:29:46,244 - INFO - ⏰ Cooldown détecté: 86 min. Prochain vote à: 2025-07-19 10:57:46
+2025-07-19 09:29:46,244 - INFO - ============================================================
+2025-07-19 09:34:00,345 - INFO - 🤖 DÉMARRAGE DU PLANIFICATEUR AUTO-VOTE
+2025-07-19 09:34:00,347 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 09:34:00,347 - INFO - Intervalle: 1h30 (90 minutes)
+2025-07-19 09:34:00,347 - INFO - Heure de démarrage: 2025-07-19 09:34:00
+2025-07-19 09:34:00,347 - INFO - Premier vote dans 5 secondes...
+2025-07-19 09:34:05,350 - INFO - === TENTATIVE DE VOTE #1 ===
+2025-07-19 09:34:05,352 - INFO - Heure: 2025-07-19 09:34:05
+2025-07-19 09:34:05,352 - INFO - Configuration du driver Selenium...
+2025-07-19 09:35:05,689 - INFO - Driver Selenium configuré avec succès
+2025-07-19 09:35:05,690 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 09:35:28,726 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 09:35:28,726 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 09:35:30,554 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 09:35:30,555 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 09:35:30,678 - INFO - Captcha soumis avec l'ID: 80152805404
+2025-07-19 09:35:40,796 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 09:35:40,797 - INFO - Injection de la solution dans la page...
+2025-07-19 09:35:44,006 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x00000001033c755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x00000001033bf454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000102f0e26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102f50360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000102f4f0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000102f4afbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000102f96b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000102f49a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x000000010338a5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x000000010338d848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x000000010336b234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x000000010338e104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x000000010335c2e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x00000001033adff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x00000001033ae184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x00000001033bf090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 09:35:44,012 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 09:35:44,023 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 09:35:44,093 - INFO - Soumission du formulaire...
+2025-07-19 09:35:46,769 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 09:35:46,770 - INFO - Vérification du résultat...
+2025-07-19 09:35:52,095 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 15 minutes 57 secondes.'
+2025-07-19 09:35:52,095 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 15 minutes 57 secondes.'
+2025-07-19 09:35:52,181 - INFO - Driver fermé
+2025-07-19 09:35:52,181 - ERROR - ❌ VOTE #1 ÉCHOUÉ
+2025-07-19 09:35:52,183 - INFO - 🕒 Cooldown extrait: 1h 25min 49s = 86 minutes
+2025-07-19 09:35:52,184 - INFO - ⏰ Cooldown détecté: 86 min. Prochain vote à: 2025-07-19 11:03:52
+2025-07-19 09:35:52,184 - INFO - ============================================================
+2025-07-19 09:35:52,184 - INFO - 🔄 PLANIFICATEUR ACTIF - Votes automatiques toutes les 1h30
+2025-07-19 09:35:52,184 - INFO - Appuyez sur Ctrl+C pour arrêter
+2025-07-19 11:04:53,009 - INFO - === TENTATIVE DE VOTE #2 ===
+2025-07-19 11:04:53,026 - INFO - Heure: 2025-07-19 11:04:53
+2025-07-19 11:04:53,027 - INFO - Configuration du driver Selenium...
+2025-07-19 11:05:37,201 - INFO - Driver Selenium configuré avec succès
+2025-07-19 11:05:37,205 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 11:05:57,439 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 11:05:57,439 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 11:05:59,570 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 11:05:59,570 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 11:05:59,748 - INFO - Captcha soumis avec l'ID: 80153188715
+2025-07-19 11:06:09,856 - INFO - Captcha en cours de résolution...
+2025-07-19 11:06:19,965 - INFO - Captcha en cours de résolution...
+2025-07-19 11:06:30,065 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 11:06:30,065 - INFO - Injection de la solution dans la page...
+2025-07-19 11:06:33,306 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x000000010299b55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000102993454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x00000001024e226c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102524360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001025230e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x000000010251efbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x000000010256ab1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x000000010251da0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x000000010295e5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000102961848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x000000010293f234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000102962104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x00000001029302e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000102981ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000102982184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000102993090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 11:06:33,310 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 11:06:33,358 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 11:06:33,393 - INFO - Soumission du formulaire...
+2025-07-19 11:06:35,943 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 11:06:35,943 - INFO - Vérification du résultat...
+2025-07-19 11:06:41,250 - INFO - ❌ Message d'erreur trouvé: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 11:06:41,251 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 11:06:41,350 - INFO - Driver fermé
+2025-07-19 11:06:41,350 - ERROR - ❌ VOTE #2 ÉCHOUÉ
+2025-07-19 11:06:41,353 - INFO - 🕒 Cooldown extrait: 1h 25min 49s = 86 minutes
+2025-07-19 11:06:41,353 - INFO - ⏰ Cooldown détecté: 86 min. Prochain vote à: 2025-07-19 12:34:41
+2025-07-19 11:06:41,353 - INFO - ============================================================
+2025-07-19 12:37:11,837 - INFO - === TENTATIVE DE VOTE #3 ===
+2025-07-19 12:37:11,855 - INFO - Heure: 2025-07-19 12:37:11
+2025-07-19 12:37:11,856 - INFO - Configuration du driver Selenium...
+2025-07-19 12:38:03,126 - INFO - Driver Selenium configuré avec succès
+2025-07-19 12:38:03,127 - INFO - Accès à la page: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 12:38:23,909 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 12:38:23,909 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 12:38:25,630 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 12:38:25,631 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 12:38:25,845 - INFO - Captcha soumis avec l'ID: 80153596024
+2025-07-19 12:38:35,980 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 12:38:35,980 - INFO - Injection de la solution dans la page...
+2025-07-19 12:38:39,149 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x000000010513b55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000105133454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000104c8226c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104cc4360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000104cc30e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000104cbefbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000104d0ab1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000104cbda0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x00000001050fe5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000105101848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x00000001050df234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000105102104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x00000001050d02e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000105121ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000105122184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000105133090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 12:38:39,152 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 12:38:39,202 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 12:38:39,240 - INFO - Soumission du formulaire...
+2025-07-19 12:38:41,872 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 12:38:41,872 - INFO - Vérification du résultat...
+2025-07-19 12:38:47,274 - INFO - ❌ Message d'erreur trouvé: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 12:38:47,274 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 12:38:47,366 - INFO - Driver fermé
+2025-07-19 12:38:47,366 - ERROR - ❌ VOTE #3 ÉCHOUÉ
+2025-07-19 12:38:47,370 - INFO - 🕒 Cooldown extrait: 1h 25min 49s = 86 minutes
+2025-07-19 12:38:47,371 - INFO - ⏰ Cooldown détecté: 86 min. Prochain vote à: 2025-07-19 14:06:47
+2025-07-19 12:38:47,371 - INFO - ============================================================
+2025-07-19 12:48:18,493 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 12:48:18,494 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 12:48:18,494 - INFO - Mode headless: False
+2025-07-19 12:48:18,494 - INFO - Configuration du driver Selenium...
+2025-07-19 12:49:14,020 - INFO - Driver Selenium configuré avec succès
+2025-07-19 12:49:14,021 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 12:49:14,021 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 12:49:29,402 - WARNING - ⚠️ Aucun lien de vote trouvé, navigation directe
+2025-07-19 12:49:44,016 - ERROR - ❌ Erreur navigation: Message: unknown error: cannot determine loading status
+from target frame detached
+  (Session info: chrome=138.0.7204.158)
+Stacktrace:
+0   chromedriver                        0x0000000102c0755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000102bff454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x000000010274e26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102738f20 cxxbridge1$string$len + 3408
+4   chromedriver                        0x0000000102736d2c chromedriver + 191788
+5   chromedriver                        0x00000001027378bc chromedriver + 194748
+6   chromedriver                        0x000000010274513c cxxbridge1$string$len + 53100
+7   chromedriver                        0x000000010275aa18 cxxbridge1$string$len + 141384
+8   chromedriver                        0x0000000102737f18 chromedriver + 196376
+9   chromedriver                        0x000000010275a3b8 cxxbridge1$string$len + 139752
+10  chromedriver                        0x00000001027d6dbc cxxbridge1$string$len + 650220
+11  chromedriver                        0x0000000102789a0c cxxbridge1$string$len + 333884
+12  chromedriver                        0x0000000102bca5e0 cxxbridge1$str$ptr + 2481340
+13  chromedriver                        0x0000000102bcd848 cxxbridge1$str$ptr + 2494244
+14  chromedriver                        0x0000000102bab234 cxxbridge1$str$ptr + 2353424
+15  chromedriver                        0x0000000102bce104 cxxbridge1$str$ptr + 2496480
+16  chromedriver                        0x0000000102b9c2e4 cxxbridge1$str$ptr + 2292160
+17  chromedriver                        0x0000000102bedff8 cxxbridge1$str$ptr + 2627284
+18  chromedriver                        0x0000000102bee184 cxxbridge1$str$ptr + 2627680
+19  chromedriver                        0x0000000102bff090 cxxbridge1$str$ptr + 2697068
+20  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+21  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 12:53:24,251 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 12:53:24,252 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 12:53:24,252 - INFO - Mode headless: False
+2025-07-19 12:53:24,252 - INFO - Configuration du driver Selenium...
+2025-07-19 12:54:18,803 - INFO - Driver Selenium configuré avec succès
+2025-07-19 12:54:18,803 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 12:54:18,803 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 12:54:34,332 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 12:54:37,914 - INFO - 🔗 Lien de vote trouvé: https://oneblock.fr/vote
+2025-07-19 12:54:42,185 - INFO - ✅ Clic sur le lien de vote depuis oneblock.fr
+2025-07-19 12:54:49,274 - ERROR - Aucune sitekey MTCaptcha trouvée sur la page
+2025-07-19 12:54:49,367 - INFO - Driver fermé
+2025-07-19 12:54:49,368 - INFO - === TEST ÉCHOUÉ ===
+2025-07-19 12:57:34,613 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 12:57:34,614 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 12:57:34,614 - INFO - Mode headless: False
+2025-07-19 12:57:34,614 - INFO - Configuration du driver Selenium...
+2025-07-19 12:57:41,871 - INFO - Driver Selenium configuré avec succès
+2025-07-19 12:57:41,872 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 12:57:41,872 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 12:57:58,849 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 12:58:01,312 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 12:58:26,349 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 12:58:26,350 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 12:58:28,158 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 12:58:28,159 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 12:58:28,354 - INFO - Captcha soumis avec l'ID: 80153681565
+2025-07-19 12:58:38,477 - INFO - Captcha en cours de résolution...
+2025-07-19 12:58:48,608 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 12:58:48,609 - INFO - Injection de la solution dans la page...
+2025-07-19 12:58:51,871 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000104fb355c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000104fab454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000104afa26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104b3c360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000104b3b0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000104b36fbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000104b82b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000104b35a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000104f765e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000104f79848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000104f57234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000104f7a104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000104f482e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000104f99ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000104f9a184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000104fab090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 12:58:51,919 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 12:58:51,934 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 12:58:51,991 - INFO - Soumission du formulaire...
+2025-07-19 12:58:54,489 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 12:58:54,490 - INFO - Vérification du résultat...
+2025-07-19 12:59:00,030 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 9 minutes 46 secondes.'
+2025-07-19 12:59:00,033 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 9 minutes 46 secondes.'
+2025-07-19 12:59:00,328 - INFO - Driver fermé
+2025-07-19 12:59:00,328 - INFO - === TEST ÉCHOUÉ ===
+2025-07-19 15:35:02,898 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 15:35:02,899 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 15:35:02,899 - INFO - Mode headless: False
+2025-07-19 15:35:02,899 - INFO - Configuration du driver Selenium...
+2025-07-19 15:36:01,051 - INFO - Driver Selenium configuré avec succès
+2025-07-19 15:36:01,052 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 15:36:01,053 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 15:36:19,498 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 15:36:21,614 - INFO - 📍 Section site trouvée: '...'
+2025-07-19 15:36:22,105 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 15:36:48,189 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 15:36:48,190 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 15:36:49,873 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 15:36:49,874 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 15:36:50,128 - INFO - Captcha soumis avec l'ID: 80154471988
+2025-07-19 15:41:12,472 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 15:41:12,473 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 15:41:12,473 - INFO - Mode headless: False
+2025-07-19 15:41:12,473 - INFO - Configuration du driver Selenium...
+2025-07-19 15:41:19,087 - INFO - Driver Selenium configuré avec succès
+2025-07-19 15:41:19,087 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 15:41:19,087 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 15:41:35,480 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 15:41:37,680 - INFO - 📍 Section site trouvée: '...'
+2025-07-19 15:41:38,142 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 15:42:05,168 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 15:42:05,169 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 15:42:07,007 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 15:42:07,008 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 15:42:07,173 - INFO - Captcha soumis avec l'ID: 80154497773
+2025-07-19 15:42:17,281 - INFO - Captcha en cours de résolution...
+2025-07-19 15:42:27,438 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 15:42:27,439 - INFO - Injection de la solution dans la page...
+2025-07-19 15:42:30,615 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x00000001026cf55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x00000001026c7454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x000000010221626c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102258360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001022570e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000102252fbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x000000010229eb1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000102251a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x00000001026925e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000102695848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000102673234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000102696104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x00000001026642e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x00000001026b5ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x00000001026b6184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x00000001026c7090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 15:42:30,620 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 15:42:30,671 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 15:42:30,710 - INFO - Soumission du formulaire...
+2025-07-19 15:42:33,267 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 15:42:33,267 - INFO - Vérification du résultat...
+2025-07-19 15:42:38,675 - INFO - ✅ Message de succès trouvé: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 15:42:38,676 - INFO - Résultat final: ✅ SUCCÈS - Message: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 15:42:38,901 - INFO - Driver fermé
+2025-07-19 15:42:38,901 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-19 16:02:14,284 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 16:02:14,285 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 16:02:14,286 - INFO - Mode headless: False
+2025-07-19 16:02:14,286 - INFO - Configuration du driver Selenium...
+2025-07-19 16:03:16,059 - INFO - Driver Selenium configuré avec succès
+2025-07-19 16:03:16,060 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 16:03:16,060 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 16:03:34,214 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 16:03:36,234 - INFO - 🔍 6 boutons trouvés sur oneblock.fr
+2025-07-19 16:03:36,627 - INFO -    Bouton 3: 'J'ai compris'
+2025-07-19 16:03:36,760 - INFO -    Bouton 4: 'SITE N°1
+Connectez-vous'
+2025-07-19 16:03:36,926 - INFO -    Bouton 5: 'SITE N°2
+Connectez-vous'
+2025-07-19 16:03:36,953 - INFO -    Bouton 6: 'ENVOYER'
+2025-07-19 16:03:36,953 - INFO -    ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-19 16:03:37,395 - INFO - 🔘 Tentative de clic sur: 'ENVOYER'
+2025-07-19 16:03:40,242 - WARNING - ⚠️ Aucun bouton 'Envoyer' trouvé ou cliquable
+2025-07-19 16:03:42,270 - INFO - 📍 Section site trouvée: '...'
+2025-07-19 16:03:42,436 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 16:19:41,111 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 16:19:41,112 - INFO - URL cible: https://serveur-prive.net/oneblockbyrivrs/vote
+2025-07-19 16:19:41,112 - INFO - Mode headless: False
+2025-07-19 16:19:41,112 - INFO - Configuration du driver Selenium...
+2025-07-19 16:20:41,227 - INFO - Driver Selenium configuré avec succès
+2025-07-19 16:20:41,228 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/oneblockbyrivrs/vote
+2025-07-19 16:20:41,228 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 16:20:59,656 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 16:21:02,899 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-19 16:21:02,983 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-19 16:21:06,339 - INFO - ✅ Clic sur 'ENVOYER' réussi
+2025-07-19 16:21:11,391 - INFO - ✅ 2 sites de vote maintenant disponibles
+2025-07-19 16:21:13,563 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 16:21:32,894 - ERROR - Aucune sitekey MTCaptcha trouvée sur la page
+2025-07-19 16:21:32,993 - INFO - Driver fermé
+2025-07-19 16:21:32,993 - INFO - === TEST ÉCHOUÉ ===
+2025-07-19 16:39:55,407 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 16:39:55,412 - INFO - URL cible: https://serveur-prive.net/oneblockbyrivrs/vote
+2025-07-19 16:39:55,413 - INFO - Mode headless: False
+2025-07-19 16:39:55,413 - INFO - Configuration du driver Selenium...
+2025-07-19 16:40:06,452 - INFO - Driver Selenium configuré avec succès
+2025-07-19 16:40:06,460 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/oneblockbyrivrs/vote
+2025-07-19 16:40:06,460 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 16:40:27,147 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 16:40:30,077 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-19 16:40:30,112 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-19 16:40:33,629 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-19 16:40:38,683 - INFO - ✅ 2 sites de vote maintenant disponibles
+2025-07-19 16:40:41,007 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 16:41:02,255 - ERROR - Aucune sitekey MTCaptcha trouvée sur la page
+2025-07-19 16:41:02,538 - INFO - Driver fermé
+2025-07-19 16:41:02,538 - INFO - === TEST ÉCHOUÉ ===
+2025-07-19 21:19:48,563 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 21:19:48,564 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 21:19:48,564 - INFO - Mode headless: False
+2025-07-19 21:19:48,564 - INFO - Configuration du driver Selenium...
+2025-07-19 21:20:43,052 - INFO - Driver Selenium configuré avec succès
+2025-07-19 21:20:43,052 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 21:20:43,052 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 21:21:01,547 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 21:21:04,585 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-19 21:21:04,601 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-19 21:21:07,790 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-19 21:21:12,818 - INFO - ✅ 2 sites de vote maintenant disponibles
+2025-07-19 21:21:15,089 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 21:21:41,165 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 21:21:41,169 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 21:21:42,689 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 21:21:42,689 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 21:21:42,894 - INFO - Captcha soumis avec l'ID: 80156216720
+2025-07-19 21:24:05,840 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-19 21:24:05,841 - INFO - URL cible: https://serveur-prive.net/oneblockbyrivrs/vote
+2025-07-19 21:24:05,841 - INFO - Mode headless: False
+2025-07-19 21:24:05,841 - INFO - Configuration du driver Selenium...
+2025-07-19 21:24:12,261 - INFO - Driver Selenium configuré avec succès
+2025-07-19 21:24:12,262 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/oneblockbyrivrs/vote
+2025-07-19 21:24:12,262 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-19 21:24:30,367 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-19 21:24:33,453 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-19 21:24:33,488 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-19 21:24:36,797 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-19 21:24:41,844 - INFO - ✅ 2 sites de vote maintenant disponibles
+2025-07-19 21:24:44,160 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-19 21:24:44,161 - INFO - 🔄 URL corrigée: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-19 21:25:07,447 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-19 21:25:07,448 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-19 21:25:09,025 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-19 21:25:09,025 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-19 21:25:09,165 - INFO - Captcha soumis avec l'ID: 80156230730
+2025-07-19 21:25:19,298 - INFO - Captcha en cours de résolution...
+2025-07-19 21:25:29,424 - INFO - Captcha en cours de résolution...
+2025-07-19 21:25:39,620 - INFO - MTCaptcha résolu avec succès!
+2025-07-19 21:25:39,620 - INFO - Injection de la solution dans la page...
+2025-07-19 21:25:42,805 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x000000010097755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x000000010096f454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x00000001004be26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000100500360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001004ff0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x00000001004fafbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000100546b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x00000001004f9a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x000000010093a5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x000000010093d848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x000000010091b234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x000000010093e104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x000000010090c2e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x000000010095dff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x000000010095e184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x000000010096f090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001853e6c0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001853e1b80 thread_start + 8
+
+2025-07-19 21:25:42,813 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-19 21:25:42,825 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-19 21:25:42,893 - INFO - Soumission du formulaire...
+2025-07-19 21:25:45,569 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-19 21:25:45,569 - INFO - Vérification du résultat...
+2025-07-19 21:25:50,928 - INFO - ✅ Message de succès trouvé: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 21:25:50,928 - INFO - Résultat final: ✅ SUCCÈS - Message: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-19 21:25:51,195 - INFO - Driver fermé
+2025-07-19 21:25:51,195 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-20 17:01:48,589 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-20 17:01:48,590 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 17:01:48,590 - INFO - Mode headless: False
+2025-07-20 17:01:48,590 - INFO - Configuration du driver Selenium...
+2025-07-20 17:02:35,897 - INFO - Driver Selenium configuré avec succès
+2025-07-20 17:02:35,898 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 17:02:35,898 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-20 17:02:54,302 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-20 17:02:57,226 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-20 17:02:57,249 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-20 17:03:00,968 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-20 17:03:06,330 - INFO - ✅ 1 sites de vote maintenant disponibles
+2025-07-20 17:03:08,530 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-20 17:03:31,224 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-20 17:03:31,224 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-20 17:03:32,719 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-20 17:03:32,719 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-20 17:03:32,909 - INFO - Captcha soumis avec l'ID: 80161089353
+2025-07-20 17:03:43,040 - INFO - MTCaptcha résolu avec succès!
+2025-07-20 17:03:43,040 - INFO - Injection de la solution dans la page...
+2025-07-20 17:03:46,289 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x000000010527755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x000000010526f454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000104dbe26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104e00360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000104dff0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000104dfafbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000104e46b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000104df9a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x000000010523a5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x000000010523d848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x000000010521b234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x000000010523e104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x000000010520c2e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x000000010525dff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x000000010525e184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x000000010526f090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001997bac0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001997b5b80 thread_start + 8
+
+2025-07-20 17:03:46,293 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-20 17:03:46,341 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-20 17:03:46,382 - INFO - Soumission du formulaire...
+2025-07-20 17:20:02,962 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-20 17:20:02,963 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 17:20:02,963 - INFO - Mode headless: False
+2025-07-20 17:20:02,963 - INFO - Configuration du driver Selenium...
+2025-07-20 17:20:08,906 - INFO - Driver Selenium configuré avec succès
+2025-07-20 17:20:08,906 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 17:20:08,906 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-20 17:20:25,352 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-20 17:20:28,457 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-20 17:20:28,479 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-20 17:20:31,541 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-20 17:20:36,568 - INFO - ✅ 1 sites de vote maintenant disponibles
+2025-07-20 17:20:38,790 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-20 17:21:00,568 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-20 17:21:00,569 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-20 17:21:02,140 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-20 17:21:02,140 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-20 17:21:02,288 - INFO - Captcha soumis avec l'ID: 80161166285
+2025-07-20 17:21:12,391 - INFO - Captcha en cours de résolution...
+2025-07-20 17:21:22,516 - INFO - MTCaptcha résolu avec succès!
+2025-07-20 17:21:22,517 - INFO - Injection de la solution dans la page...
+2025-07-20 17:21:25,686 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000100d6755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000100d5f454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x00000001008ae26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x00000001008f0360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001008ef0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x00000001008eafbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000100936b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x00000001008e9a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000100d2a5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000100d2d848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000100d0b234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000100d2e104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000100cfc2e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000100d4dff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000100d4e184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000100d5f090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001997bac0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001997b5b80 thread_start + 8
+
+2025-07-20 17:21:25,693 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-20 17:21:25,741 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-20 17:21:25,778 - INFO - Soumission du formulaire...
+2025-07-20 17:21:28,375 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-20 17:21:28,375 - INFO - Vérification du résultat...
+2025-07-20 17:21:33,740 - INFO - ✅ Message de succès trouvé: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-20 17:21:33,741 - INFO - Résultat final: ✅ SUCCÈS - Message: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-20 17:21:33,850 - INFO - Driver fermé
+2025-07-20 17:21:33,850 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-20 17:23:45,400 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-20 17:23:45,401 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 17:23:45,401 - INFO - Mode headless: False
+2025-07-20 17:23:45,401 - INFO - Configuration du driver Selenium...
+2025-07-20 17:23:53,598 - INFO - Driver Selenium configuré avec succès
+2025-07-20 17:23:53,598 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 17:23:53,599 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-20 17:24:11,939 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-20 17:24:14,908 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-20 17:24:14,918 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-20 17:24:18,317 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-20 17:24:23,356 - INFO - ✅ 1 sites de vote maintenant disponibles
+2025-07-20 17:24:25,608 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-20 17:24:48,057 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-20 17:24:48,057 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-20 17:24:49,654 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-20 17:24:49,654 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-20 17:24:49,876 - INFO - Captcha soumis avec l'ID: 80161182234
+2025-07-20 17:25:00,018 - INFO - MTCaptcha résolu avec succès!
+2025-07-20 17:25:00,018 - INFO - Injection de la solution dans la page...
+2025-07-20 17:25:03,214 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000102de755c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000102ddf454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x000000010292e26c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102970360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x000000010296f0e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x000000010296afbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x00000001029b6b1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000102969a0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000102daa5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000102dad848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000102d8b234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000102dae104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000102d7c2e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000102dcdff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000102dce184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000102ddf090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001997bac0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001997b5b80 thread_start + 8
+
+2025-07-20 17:25:03,219 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-20 17:25:03,234 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-20 17:25:03,354 - INFO - Soumission du formulaire...
+2025-07-20 17:25:06,042 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-20 17:25:06,042 - INFO - Vérification du résultat...
+2025-07-20 17:25:11,433 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 26 minutes 20 secondes.'
+2025-07-20 17:25:11,434 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 26 minutes 20 secondes.'
+2025-07-20 17:25:11,562 - INFO - Driver fermé
+2025-07-20 17:25:11,562 - INFO - === TEST ÉCHOUÉ ===
+2025-07-20 19:28:00,656 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-20 19:28:00,656 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 19:28:00,657 - INFO - Mode headless: False
+2025-07-20 19:28:00,657 - INFO - Configuration du driver Selenium...
+2025-07-20 19:28:07,471 - INFO - Driver Selenium configuré avec succès
+2025-07-20 19:28:07,471 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 19:28:07,471 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-20 19:28:27,104 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-20 19:28:30,197 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-20 19:28:30,215 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-20 19:28:34,047 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-20 19:28:39,075 - INFO - ✅ 1 sites de vote maintenant disponibles
+2025-07-20 19:28:41,282 - INFO - 📍 Bouton vote trouvé: 'SITE N°1
+Votez maintenant...'
+2025-07-20 19:28:41,383 - INFO - 📍 SITE N°1 trouvé: 'SITE N°1
+Votez maintenant...'
+2025-07-20 19:28:41,555 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-20 19:29:05,864 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-20 19:29:05,865 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-20 19:29:07,614 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-20 19:29:07,614 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-20 19:29:07,854 - INFO - Captcha soumis avec l'ID: 80161722387
+2025-07-20 19:29:18,047 - INFO - MTCaptcha résolu avec succès!
+2025-07-20 19:29:18,048 - INFO - Injection de la solution dans la page...
+2025-07-20 19:29:21,313 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000102d0b55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000102d03454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x000000010285226c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000102894360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x00000001028930e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x000000010288efbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x00000001028dab1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x000000010288da0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000102cce5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000102cd1848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000102caf234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000102cd2104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000102ca02e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000102cf1ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000102cf2184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000102d03090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001997bac0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001997b5b80 thread_start + 8
+
+2025-07-20 19:29:21,317 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-20 19:29:21,329 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-20 19:29:21,462 - INFO - Soumission du formulaire...
+2025-07-20 19:29:24,135 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-20 19:29:24,135 - INFO - Vérification du résultat...
+2025-07-20 19:29:29,495 - INFO - ✅ Message de succès trouvé: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-20 19:29:29,496 - INFO - Résultat final: ✅ SUCCÈS - Message: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-20 19:29:29,650 - INFO - Driver fermé
+2025-07-20 19:29:29,650 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-20 22:49:44,590 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-20 22:49:44,590 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 22:49:44,590 - INFO - Mode headless: False
+2025-07-20 22:49:44,590 - INFO - Configuration du driver Selenium...
+2025-07-20 22:49:50,428 - INFO - Driver Selenium configuré avec succès
+2025-07-20 22:49:50,428 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 22:49:50,428 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-20 22:50:08,312 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-20 22:50:08,461 - INFO - ✅ Script d'interception API injecté
+2025-07-20 22:50:11,386 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-20 22:50:11,394 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-20 22:50:14,716 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-20 22:50:19,729 - INFO - ⚠️ Sites de vote pas encore visibles, tentative suivante...
+2025-07-20 22:50:21,736 - INFO - 📊 URLs de vote interceptées: []
+2025-07-20 22:50:21,736 - WARNING - ⚠️ URL serveur-prive non trouvée dans l'API, utilisation du bouton
+2025-07-20 22:50:22,224 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-20 22:50:46,689 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-20 22:50:46,690 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-20 22:50:48,246 - INFO - Aucun champ pseudonyme trouvé ou accessible
+2025-07-20 22:50:48,246 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-20 22:50:48,460 - INFO - Captcha soumis avec l'ID: 80162555617
+2025-07-20 22:50:58,599 - INFO - Captcha en cours de résolution...
+2025-07-20 22:51:08,757 - INFO - MTCaptcha résolu avec succès!
+2025-07-20 22:51:08,758 - INFO - Injection de la solution dans la page...
+2025-07-20 22:51:11,948 - WARNING - ⚠️ Erreur avec champ username: Message: element not interactable
+  (Session info: chrome=138.0.7204.158); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+0   chromedriver                        0x0000000104feb55c cxxbridge1$str$ptr + 2731064
+1   chromedriver                        0x0000000104fe3454 cxxbridge1$str$ptr + 2698032
+2   chromedriver                        0x0000000104b3226c cxxbridge1$string$len + 90268
+3   chromedriver                        0x0000000104b74360 cxxbridge1$string$len + 360848
+4   chromedriver                        0x0000000104b730e4 cxxbridge1$string$len + 356116
+5   chromedriver                        0x0000000104b6efbc cxxbridge1$string$len + 339436
+6   chromedriver                        0x0000000104bbab1c cxxbridge1$string$len + 649548
+7   chromedriver                        0x0000000104b6da0c cxxbridge1$string$len + 333884
+8   chromedriver                        0x0000000104fae5e0 cxxbridge1$str$ptr + 2481340
+9   chromedriver                        0x0000000104fb1848 cxxbridge1$str$ptr + 2494244
+10  chromedriver                        0x0000000104f8f234 cxxbridge1$str$ptr + 2353424
+11  chromedriver                        0x0000000104fb2104 cxxbridge1$str$ptr + 2496480
+12  chromedriver                        0x0000000104f802e4 cxxbridge1$str$ptr + 2292160
+13  chromedriver                        0x0000000104fd1ff8 cxxbridge1$str$ptr + 2627284
+14  chromedriver                        0x0000000104fd2184 cxxbridge1$str$ptr + 2627680
+15  chromedriver                        0x0000000104fe3090 cxxbridge1$str$ptr + 2697068
+16  libsystem_pthread.dylib             0x00000001997bac0c _pthread_start + 136
+17  libsystem_pthread.dylib             0x00000001997b5b80 thread_start + 8
+
+2025-07-20 22:51:11,952 - INFO - ✅ Pseudonyme 'zCapsLock' saisi via JavaScript
+2025-07-20 22:51:12,000 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-20 22:51:12,032 - INFO - Soumission du formulaire...
+2025-07-20 22:51:14,535 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-20 22:51:14,535 - INFO - Vérification du résultat...
+2025-07-20 22:51:19,865 - INFO - ✅ Message de succès trouvé: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-20 22:51:19,866 - INFO - Résultat final: ✅ SUCCÈS - Message: 'Succès : Vote validé, cliquez ici si vous désirez visiter le classement Minecraft.'
+2025-07-20 22:51:19,992 - INFO - Driver fermé
+2025-07-20 22:51:19,993 - INFO - === TEST TERMINÉ AVEC SUCCÈS ===
+2025-07-20 22:52:53,954 - INFO - === DÉMARRAGE DU TEST MTCAPTCHA ===
+2025-07-20 22:52:53,955 - INFO - URL cible: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 22:52:53,955 - INFO - Mode headless: False
+2025-07-20 22:52:53,955 - INFO - Configuration du driver Selenium...
+2025-07-20 22:52:59,746 - INFO - Driver Selenium configuré avec succès
+2025-07-20 22:52:59,746 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/minecraft/oneblockbyrivrs/vote
+2025-07-20 22:52:59,746 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-20 22:53:15,706 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-20 22:53:15,765 - INFO - ✅ Script d'interception API injecté
+2025-07-20 22:53:18,635 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-20 22:53:18,642 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-20 22:53:21,994 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-20 22:53:27,012 - INFO - ⚠️ Sites de vote pas encore visibles, tentative suivante...
+2025-07-20 22:53:29,015 - INFO - ⏳ Attente de l'appel API availableVote...
+2025-07-20 22:53:30,026 - INFO -    Attente API... 1s (URLs: [])
+2025-07-20 22:53:31,035 - INFO -    Attente API... 2s (URLs: [])
+2025-07-20 22:53:32,043 - INFO -    Attente API... 3s (URLs: [])
+2025-07-20 22:53:33,047 - INFO -    Attente API... 4s (URLs: [])
+2025-07-20 22:53:34,057 - INFO -    Attente API... 5s (URLs: [])
+2025-07-20 22:53:35,065 - INFO -    Attente API... 6s (URLs: [])
+2025-07-20 22:53:36,071 - INFO -    Attente API... 7s (URLs: [])
+2025-07-20 22:53:37,080 - INFO -    Attente API... 8s (URLs: [])
+2025-07-20 22:53:38,089 - INFO -    Attente API... 9s (URLs: [])
+2025-07-20 22:53:39,097 - INFO -    Attente API... 10s (URLs: [])
+2025-07-20 22:53:39,097 - WARNING - ⚠️ URL serveur-prive non trouvée dans l'API après 10s, utilisation du bouton
+2025-07-20 22:53:39,544 - WARNING - ⚠️ Aucun lien de vote trouvé sur oneblock.fr, navigation directe
+2025-07-20 22:54:04,917 - INFO - Sitekey MTCaptcha trouvée dans JS config: MTPublic-42pXmytZe
+2025-07-20 22:54:04,918 - INFO - Vérification si pseudonyme doit être rempli...
+2025-07-20 22:54:06,034 - INFO - Pseudonyme 'zCapsLock' saisi dans: input[name='username']
+2025-07-20 22:54:06,034 - INFO - Envoi de la demande de résolution à 2Captcha...
+2025-07-20 22:54:06,225 - INFO - Captcha soumis avec l'ID: 80162567549
+2025-07-20 22:54:16,331 - INFO - Captcha en cours de résolution...
+2025-07-20 22:54:26,519 - INFO - MTCaptcha résolu avec succès!
+2025-07-20 22:54:26,519 - INFO - Injection de la solution dans la page...
+2025-07-20 22:54:30,951 - WARNING - ⚠️ Valeur dans le champ: '' (attendu: 'zCapsLock')
+2025-07-20 22:54:30,979 - INFO - Solution injectée dans: input[name='mtcaptcha-verifiedtoken']
+2025-07-20 22:54:31,014 - INFO - Soumission du formulaire...
+2025-07-20 22:54:33,698 - INFO - Formulaire soumis via JavaScript: #voteBtn
+2025-07-20 22:54:33,698 - INFO - Vérification du résultat...
+2025-07-20 22:54:39,169 - INFO - ❌ Message d'erreur trouvé: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 26 minutes 40 secondes.'
+2025-07-20 22:54:39,169 - INFO - Résultat final: ❌ ÉCHEC - Erreur: 'Erreur :
+Vous avez déjà voté pour ce serveur.
+Prochain vote dans 1 heure 26 minutes 40 secondes.'
+2025-07-20 22:54:39,296 - INFO - Driver fermé
+2025-07-20 22:54:39,296 - INFO - === TEST ÉCHOUÉ ===
