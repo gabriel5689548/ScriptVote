@@ -67,17 +67,16 @@ jobs:
 
       - name: 🚗 Install ChromeDriver
         run: |
-          # Obtenir la version de Chrome installée
-          CHROME_VERSION=$(google-chrome --version | cut -d " " -f3 | cut -d "." -f1-3)
-          echo "Chrome version: $CHROME_VERSION"
+          # Utiliser une version stable connue de ChromeDriver
+          CHROMEDRIVER_VERSION="130.0.6723.58"
+          echo "Downloading ChromeDriver version: $CHROMEDRIVER_VERSION"
 
-          # Obtenir la version compatible de ChromeDriver
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
+          # Télécharger depuis la nouvelle API Chrome for Testing
+          wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
 
-          # Télécharger et installer ChromeDriver
-          wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-          sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+          # Extraire et installer
+          sudo unzip /tmp/chromedriver.zip -d /tmp/
+          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
 
           # Vérifier l'installation
