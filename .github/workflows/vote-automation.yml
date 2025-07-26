@@ -88,18 +88,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 🔑 Create .env file from secrets
+      - name: 🔑 Use existing .env file
         run: |
-          echo "api_key=${{ secrets.CAPTCHA_API_KEY }}" > .env
-          echo "username=${{ secrets.USERNAME }}" >> .env
-
-          # Vérifier que les secrets sont bien configurés
-          if [ -z "${{ secrets.CAPTCHA_API_KEY }}" ]; then
-            echo "❌ ERREUR: CAPTCHA_API_KEY non configuré dans les secrets GitHub"
+          # Vérifier que le fichier .env existe et contient l'API key
+          if [ ! -f .env ]; then
+            echo "❌ ERREUR: Fichier .env non trouvé"
             exit 1
           fi
 
-          echo "✅ Fichier .env créé avec succès"
+          if ! grep -q "api_key\|TWOCAPTCHA_API_KEY" .env; then
+            echo "❌ ERREUR: API key non trouvée dans .env"
+            exit 1
+          fi
+
+          echo "✅ Fichier .env trouvé et valide"
 
       - name: 🗳️ Execute vote script
         run: |
@@ -159,13 +161,16 @@ jobs:
 
       - name: 🔔 Notify on failure (optionnel)
         if: failure()
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
-          if [ -n "$DISCORD_WEBHOOK" ]; then
-            curl -X POST -H 'Content-type: application/json' \
-            --data "{\"content\":\"❌ Vote automation failed at $(date)\\nWorkflow: ${{ github.workflow }}\\nRun: ${{ github.run_id }}\"}" \
-            "$DISCORD_WEBHOOK"
+          # Vérifier si un webhook Discord est configuré dans .env
+          if [ -f .env ] && grep -q "DISCORD_WEBHOOK" .env; then
+            DISCORD_WEBHOOK=$(grep "DISCORD_WEBHOOK" .env | cut -d'=' -f2)
+            if [ -n "$DISCORD_WEBHOOK" ]; then
+              curl -X POST -H 'Content-type: application/json' \
+              --data "{\"content\":\"❌ Vote automation failed at $(date)\\nWorkflow: ${{ github.workflow }}\\nRun: ${{ github.run_id }}\"}" \
+              "$DISCORD_WEBHOOK"
+              echo "Notification Discord envoyée"
+            fi
           else
             echo "Discord webhook not configured, skipping notification"
           fi
