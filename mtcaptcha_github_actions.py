@@ -136,8 +136,48 @@ class MTCaptchaVoter:
                                 self.driver.close()
                                 self.driver.switch_to.window(original_tab)
                                 logger.info("🔄 Retour à l'onglet oneblock.fr")
-                                # Vérifier le cooldown
-                                return self.check_cooldown_on_oneblock(site1_button)
+                                
+                                # Si le vote a réussi sur serveur-prive.net, on considère que c'est un succès
+                                if vote_result:
+                                    logger.info("🎉 Vote confirmé sur serveur-prive.net!")
+                                    
+                                    # Essayer de rafraîchir la page oneblock.fr pour forcer la synchronisation
+                                    logger.info("🔄 Rafraîchissement de oneblock.fr pour synchronisation...")
+                                    self.driver.refresh()
+                                    time.sleep(5)
+                                    
+                                    # Rechercher à nouveau le bouton Site N°1 après rafraîchissement
+                                    try:
+                                        all_buttons = self.driver.find_elements(By.TAG_NAME, "button")
+                                        refreshed_site1_button = None
+                                        
+                                        for btn in all_buttons:
+                                            text = btn.text.strip()
+                                            if "SITE N°1" in text and btn.is_displayed():
+                                                refreshed_site1_button = btn
+                                                logger.info(f"🔍 Bouton Site N°1 après rafraîchissement: '{text}'")
+                                                break
+                                        
+                                        if refreshed_site1_button:
+                                            cooldown_confirmed = self.check_cooldown_on_oneblock(refreshed_site1_button)
+                                        else:
+                                            logger.warning("⚠️ Bouton Site N°1 non trouvé après rafraîchissement")
+                                            cooldown_confirmed = False
+                                            
+                                    except Exception as e:
+                                        logger.warning(f"⚠️ Erreur lors du rafraîchissement: {e}")
+                                        cooldown_confirmed = False
+                                    
+                                    if cooldown_confirmed:
+                                        logger.info("✅ Cooldown confirmé sur oneblock.fr après rafraîchissement")
+                                    else:
+                                        logger.info("ℹ️ Cooldown non visible sur oneblock.fr mais vote validé sur serveur-prive.net")
+                                    
+                                    # Dans tous les cas, considérer comme succès si validé sur serveur-prive.net
+                                    return True
+                                else:
+                                    logger.warning("⚠️ Vote échoué sur serveur-prive.net")
+                                    return False
                         break
                     
                     # Si pas de nouvel onglet, vérifier si le bouton change d'état
@@ -246,36 +286,75 @@ class MTCaptchaVoter:
                 logger.info(f"📊 Données envoyées à 2Captcha: sitekey={sitekey}, pageurl={page_url}")
                 
                 response = requests.post('http://2captcha.com/in.php', data=submit_data, timeout=30)
-                result = response.json()
+                
+                # Vérifier que la réponse est valide
+                if response.status_code != 200:
+                    logger.error(f"❌ Erreur HTTP 2Captcha: {response.status_code}")
+                    return False
+                
+                try:
+                    result = response.json()
+                except ValueError as e:
+                    logger.error(f"❌ Réponse 2Captcha invalide (pas JSON): {response.text}")
+                    return False
                 
                 logger.info(f"📊 Réponse 2Captcha: {result}")
                 
-                if result['status'] != 1:
-                    logger.error(f"❌ Erreur soumission 2Captcha: {result}")
+                if result.get('status') != 1:
+                    error_msg = result.get('request', 'Erreur inconnue')
+                    logger.error(f"❌ Erreur soumission 2Captcha: {error_msg}")
                     return False
                 
                 captcha_id = result['request']
                 logger.info(f"🎯 Captcha soumis avec l'ID: {captcha_id}")
                 
                 # Attendre la résolution
+                solution = None
                 for attempt in range(30):
                     time.sleep(10)
                     
-                    check_response = requests.get(f'http://2captcha.com/res.php?key={self.api_key}&action=get&id={captcha_id}&json=1', timeout=30)
-                    check_result = check_response.json()
-                    
-                    if check_result['status'] == 1:
-                        solution = check_result['request']
-                        logger.info("🎉 MTCaptcha résolu avec succès!")
-                        break
-                    elif check_result['error'] == 'CAPCHA_NOT_READY':
-                        logger.info(f"⏳ Captcha en cours de résolution... (tentative {attempt+1}/30)")
+                    try:
+                        check_response = requests.get(f'http://2captcha.com/res.php?key={self.api_key}&action=get&id={captcha_id}&json=1', timeout=30)
+                        
+                        if check_response.status_code != 200:
+                            logger.warning(f"⚠️ Erreur HTTP lors de la vérification: {check_response.status_code}")
+                            continue
+                        
+                        try:
+                            check_result = check_response.json()
+                        except ValueError:
+                            logger.warning(f"⚠️ Réponse non-JSON: {check_response.text}")
+                            continue
+                        
+                        logger.info(f"📊 Vérification captcha #{attempt+1}: {check_result}")
+                        
+                        if check_result.get('status') == 1:
+                            solution = check_result.get('request')
+                            if solution:
+                                logger.info("🎉 MTCaptcha résolu avec succès!")
+                                break
+                            else:
+                                logger.warning("⚠️ Solution vide reçue")
+                                continue
+                        elif check_result.get('error') == 'CAPCHA_NOT_READY':
+                            logger.info(f"⏳ Captcha en cours de résolution... (tentative {attempt+1}/30)")
+                            continue
+                        elif check_result.get('status') == 0 and check_result.get('error'):
+                            logger.error(f"❌ Erreur résolution captcha: {check_result['error']}")
+                            return False
+                        else:
+                            logger.warning(f"⚠️ Réponse inattendue: {check_result}")
+                            continue
+                            
+                    except requests.RequestException as e:
+                        logger.warning(f"⚠️ Erreur réseau lors de la vérification #{attempt+1}: {e}")
                         continue
-                    else:
-                        logger.error(f"❌ Erreur résolution captcha: {check_result}")
-                        return False
                 else:
                     logger.error("❌ Timeout résolution captcha (5 minutes)")
+                    return False
+                
+                if not solution:
+                    logger.error("❌ Aucune solution reçue")
                     return False
                 
                 # Injecter la solution
