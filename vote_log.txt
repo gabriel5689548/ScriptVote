@@ -1,0 +1,32 @@
+2025-07-21 11:18:28,787 - INFO - === DÉMARRAGE DU VOTE AUTOMATIQUE EN BOUCLE ===
+2025-07-21 11:18:28,787 - INFO - URL cible: https://serveur-prive.net/vote/oneblock
+2025-07-21 11:18:28,788 - INFO - Mode headless: True
+2025-07-21 11:18:28,788 - INFO - Intervalle: 5400s (1h 30min)
+2025-07-21 11:18:28,788 - INFO - 
+🔄 === VOTE N°1 - 2025-07-21 11:18:28 ===
+2025-07-21 11:18:28,788 - INFO - Configuration du driver Selenium...
+2025-07-21 11:18:34,159 - INFO - Driver Selenium configuré avec succès
+2025-07-21 11:18:34,159 - INFO - 🎯 Démarrage du processus de vote pour: https://serveur-prive.net/vote/oneblock
+2025-07-21 11:18:34,159 - INFO - 🌐 Étape 1: Accès à https://oneblock.fr/vote
+2025-07-21 11:18:53,140 - INFO - ✅ Pseudonyme 'zCapsLock' saisi dans oneblock.fr (placeholder: 'Entrez votre pseudo')
+2025-07-21 11:18:54,073 - INFO - ✅ Bouton 'Envoyer' identifié: 'ENVOYER'
+2025-07-21 11:18:54,073 - INFO - 🔘 Clic sur bouton: 'ENVOYER'
+2025-07-21 11:18:58,382 - INFO - ✅ Clic normal sur 'ENVOYER' réussi
+2025-07-21 11:19:03,385 - INFO - 🔍 Recherche et clic direct sur bouton SITE N°1...
+2025-07-21 11:19:04,129 - INFO - 🎯 Bouton SITE N°1 trouvé: 'SITE N°1
+Votez maintenant'
+2025-07-21 11:19:04,129 - INFO - 🖱️ Clic sur bouton SITE N°1...
+2025-07-21 11:19:07,192 - INFO - ✅ Clic sur SITE N°1 effectué
+2025-07-21 11:19:07,192 - INFO - ⏳ Vérification du résultat du vote...
+2025-07-21 11:19:08,320 - INFO - ⏳ Vote en cours... 'SITE N°1
+Veuillez patienter'
+2025-07-21 11:19:09,410 - INFO - ⏳ Vote en cours... 'SITE N°1
+Veuillez patienter'
+2025-07-21 11:19:10,470 - INFO - ⏳ Vote en cours... 'SITE N°1
+Veuillez patienter'
+2025-07-21 11:19:11,528 - INFO - ⏳ Vote en cours... 'SITE N°1
+Veuillez patienter'
+2025-07-21 11:19:12,587 - INFO - ⏳ Vote en cours... 'SITE N°1
+Veuillez patienter'
+2025-07-21 11:19:13,645 - INFO - ⏳ Vote en cours... 'SITE N°1
+Veuillez patienter'

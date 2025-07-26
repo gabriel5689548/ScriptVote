@@ -1,6 +1,8 @@
-# Dépendances pour le testeur MTCaptcha
-selenium>=4.15.0
-requests>=2.31.0
-python-dotenv>=1.0.0
-webdriver-manager>=4.0.0
-schedule>=1.2.0
+# GitHub Actions Vote Automation Dependencies
+selenium==4.15.2
+requests==2.31.0
+python-dotenv==1.0.0
+
+# Optionnel: Pour de meilleures performances
+urllib3==2.0.7
+certifi==2023.11.17

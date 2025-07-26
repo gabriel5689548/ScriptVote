@@ -3,6 +3,8 @@
 import time
 import logging
 import argparse
+import os
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,30 +12,45 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import requests
 
+# Charger les variables d'environnement
+load_dotenv()
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class MTCaptchaVoter:
-    def __init__(self, headless=False, timeout=120):
+    def __init__(self, headless=True, timeout=120):
         self.timeout = timeout
-        self.api_key = "ab6c51d0ab8c2fd57a7a2bdadb219592"  # 2Captcha API key
-        self.username = "zCapsLock"
+        # Compatible avec les deux formats d'API key
+        self.api_key = os.getenv('api_key') or os.getenv('TWOCAPTCHA_API_KEY')
+        self.username = os.getenv('username', 'zCapsLock')  # Par défaut zCapsLock
         
-        # Configuration Chrome
+        if not self.api_key:
+            raise ValueError("❌ API key non trouvée dans .env ! Ajoutez: api_key=votre_clé ou TWOCAPTCHA_API_KEY=votre_clé")
+        
+        # Configuration Chrome pour GitHub Actions
         chrome_options = Options()
-        if headless:
-            chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless")  # Toujours headless sur GitHub Actions
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--window-size=1920,1080")
+        chrome_options.add_argument("--disable-extensions")
+        chrome_options.add_argument("--disable-plugins")
+        chrome_options.add_argument("--disable-images")  # Économiser de la bande passante
+        chrome_options.add_argument("--disable-javascript")  # Sauf si nécessaire
+        chrome_options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
         
-        logger.info("Configuration du driver Selenium...")
-        self.driver = webdriver.Chrome(options=chrome_options)
-        logger.info("Driver Selenium configuré avec succès")
+        logger.info("🔧 Configuration du driver Selenium pour GitHub Actions...")
+        try:
+            self.driver = webdriver.Chrome(options=chrome_options)
+            logger.info("✅ Driver Selenium configuré avec succès")
+        except Exception as e:
+            logger.error(f"❌ Erreur configuration driver: {e}")
+            raise
     
     def vote_oneblock_site1(self):
-        """Vote pour le SITE N°1 sur oneblock.fr avec la logique corrigée"""
+        """Vote pour le SITE N°1 sur oneblock.fr - Version GitHub Actions"""
         
         try:
             logger.info("🎯 Démarrage du processus de vote sur oneblock.fr")
@@ -50,7 +67,7 @@ class MTCaptchaVoter:
                 )
                 username_input.clear()
                 username_input.send_keys(self.username)
-                logger.info(f"✅ Pseudonyme '{self.username}' saisi dans oneblock.fr (placeholder: '{username_input.get_attribute('placeholder')}')")
+                logger.info(f"✅ Pseudonyme '{self.username}' saisi dans oneblock.fr")
             except Exception as e:
                 logger.warning(f"⚠️ Erreur remplissage pseudo oneblock.fr: {str(e)}")
             
@@ -60,7 +77,7 @@ class MTCaptchaVoter:
             for btn in all_buttons:
                 if btn.text.strip() == "ENVOYER" and btn.is_displayed():
                     envoyer_button = btn
-                    logger.info(f"✅ Bouton 'Envoyer' identifié: '{btn.text.strip()}'")
+                    logger.info("✅ Bouton 'Envoyer' identifié")
                     break
             
             if envoyer_button:
@@ -81,7 +98,7 @@ class MTCaptchaVoter:
                 text = btn.text.strip()
                 if "SITE N°1" in text and "Votez maintenant" in text and btn.is_displayed():
                     site1_button = btn
-                    logger.info(f"🎯 Bouton SITE N°1 trouvé: '{text}'")
+                    logger.info("🎯 Bouton SITE N°1 trouvé")
                     break
             
             if site1_button:
@@ -170,7 +187,7 @@ class MTCaptchaVoter:
                         matches = re.findall(r'MTPublic-[a-zA-Z0-9]+', script_text)
                         if matches:
                             sitekey = matches[0]
-                            logger.info(f"Sitekey MTCaptcha trouvée dans JS config: {sitekey}")
+                            logger.info(f"✅ Sitekey MTCaptcha trouvée dans JS config: {sitekey}")
                             break
                 
                 if not sitekey:
@@ -180,7 +197,7 @@ class MTCaptchaVoter:
                         potential_key = elem.get_attribute('data-sitekey') or elem.get_attribute('data-site-key')
                         if potential_key and 'MTPublic-' in potential_key:
                             sitekey = potential_key
-                            logger.info(f"Sitekey MTCaptcha trouvée dans attribut: {sitekey}")
+                            logger.info(f"✅ Sitekey MTCaptcha trouvée dans attribut: {sitekey}")
                             break
                 
                 if not sitekey:
@@ -192,7 +209,7 @@ class MTCaptchaVoter:
                 return False
             
             # Remplir le pseudonyme si nécessaire
-            logger.info("Vérification si pseudonyme doit être rempli...")
+            logger.info("🔍 Vérification si pseudonyme doit être rempli...")
             try:
                 username_fields = self.driver.find_elements(By.CSS_SELECTOR, "input[name*='username'], input[id*='username'], input[placeholder*='pseudo']")
                 for field in username_fields:
@@ -201,10 +218,10 @@ class MTCaptchaVoter:
                         if not current_value or current_value.strip() == '':
                             field.clear()
                             field.send_keys(self.username)
-                            logger.info(f"Pseudonyme '{self.username}' saisi dans: {field.get_attribute('name') or field.get_attribute('id')}")
+                            logger.info(f"✅ Pseudonyme '{self.username}' saisi dans: {field.get_attribute('name') or field.get_attribute('id')}")
                         break
                 else:
-                    logger.info("Aucun champ pseudonyme trouvé ou accessible")
+                    logger.info("ℹ️ Aucun champ pseudonyme trouvé ou accessible")
             except Exception as e:
                 logger.warning(f"⚠️ Erreur avec champ username: {e}")
                 try:
@@ -215,7 +232,7 @@ class MTCaptchaVoter:
                     logger.warning(f"⚠️ Erreur JavaScript username: {e2}")
             
             # Résoudre le MTCaptcha avec 2Captcha
-            logger.info("Envoi de la demande de résolution à 2Captcha...")
+            logger.info("📤 Envoi de la demande de résolution à 2Captcha...")
             try:
                 page_url = self.driver.current_url
                 submit_data = {
@@ -235,12 +252,10 @@ class MTCaptchaVoter:
                 
                 if result['status'] != 1:
                     logger.error(f"❌ Erreur soumission 2Captcha: {result}")
-                    # Continuer quand même pour tester la détection de cooldown
-                    logger.warning("⚠️ Continuons sans captcha pour tester la détection de cooldown...")
-                    return True
+                    return False
                 
                 captcha_id = result['request']
-                logger.info(f"Captcha soumis avec l'ID: {captcha_id}")
+                logger.info(f"🎯 Captcha soumis avec l'ID: {captcha_id}")
                 
                 # Attendre la résolution
                 for attempt in range(30):
@@ -251,30 +266,30 @@ class MTCaptchaVoter:
                     
                     if check_result['status'] == 1:
                         solution = check_result['request']
-                        logger.info("MTCaptcha résolu avec succès!")
+                        logger.info("🎉 MTCaptcha résolu avec succès!")
                         break
                     elif check_result['error'] == 'CAPCHA_NOT_READY':
-                        logger.info("Captcha en cours de résolution...")
+                        logger.info(f"⏳ Captcha en cours de résolution... (tentative {attempt+1}/30)")
                         continue
                     else:
                         logger.error(f"❌ Erreur résolution captcha: {check_result}")
                         return False
                 else:
-                    logger.error("❌ Timeout résolution captcha")
+                    logger.error("❌ Timeout résolution captcha (5 minutes)")
                     return False
                 
                 # Injecter la solution
-                logger.info("Injection de la solution dans la page...")
+                logger.info("💉 Injection de la solution dans la page...")
                 
                 # Injecter dans le champ MTCaptcha
                 try:
                     self.driver.execute_script(f"document.querySelector('input[name=\"mtcaptcha-verifiedtoken\"]').value = '{solution}';")
-                    logger.info("Solution injectée dans: input[name='mtcaptcha-verifiedtoken']")
+                    logger.info("✅ Solution injectée dans: input[name='mtcaptcha-verifiedtoken']")
                 except Exception as e:
                     logger.warning(f"⚠️ Erreur injection solution: {e}")
                 
                 # Soumettre le formulaire
-                logger.info("Soumission du formulaire...")
+                logger.info("📤 Soumission du formulaire...")
                 
                 # Chercher et cliquer sur le bouton de vote
                 vote_selectors = [
@@ -297,13 +312,13 @@ class MTCaptchaVoter:
                             if element.is_displayed():
                                 try:
                                     element.click()
-                                    logger.info(f"Formulaire soumis via clic: {selector}")
+                                    logger.info(f"✅ Formulaire soumis via clic: {selector}")
                                     form_submitted = True
                                     break
                                 except:
                                     try:
                                         self.driver.execute_script("arguments[0].click();", element)
-                                        logger.info(f"Formulaire soumis via JavaScript: {selector}")
+                                        logger.info(f"✅ Formulaire soumis via JavaScript: {selector}")
                                         form_submitted = True
                                         break
                                     except:
@@ -317,14 +332,14 @@ class MTCaptchaVoter:
                     logger.warning("⚠️ Aucun bouton de soumission trouvé, tentative JavaScript")
                     try:
                         self.driver.execute_script("document.forms[0].submit();")
-                        logger.info("Formulaire soumis via JavaScript générique")
+                        logger.info("✅ Formulaire soumis via JavaScript générique")
                         form_submitted = True
                     except Exception as e:
                         logger.error(f"❌ Erreur soumission formulaire: {e}")
                         return False
                 
                 # Vérifier le résultat
-                logger.info("Vérification du résultat...")
+                logger.info("🔍 Vérification du résultat...")
                 time.sleep(5)
                 
                 page_source = self.driver.page_source.lower()
@@ -348,7 +363,7 @@ class MTCaptchaVoter:
                 for pattern in success_patterns:
                     if pattern in visible_text:
                         success_msg = [line.strip() for line in visible_text.split('\n') if pattern in line][0]
-                        logger.info(f"✅ Message de succès trouvé: '{success_msg}'")
+                        logger.info(f"🎉 Message de succès trouvé: '{success_msg}'")
                         return True
                 
                 for pattern in error_patterns:
@@ -434,83 +449,40 @@ class MTCaptchaVoter:
     def close(self):
         if self.driver:
             self.driver.quit()
-            logger.info("Driver fermé")
+            logger.info("🔒 Driver fermé")
 
 def main():
-    parser = argparse.ArgumentParser(description='Script de vote automatique MTCaptcha via oneblock.fr')
-    parser.add_argument('--headless', action='store_true', help='Mode headless')
+    parser = argparse.ArgumentParser(description='Script de vote automatique MTCaptcha pour GitHub Actions')
+    parser.add_argument('--headless', action='store_true', default=True, help='Mode headless (défaut: True)')
     parser.add_argument('--timeout', type=int, default=120, help='Timeout en secondes')
-    parser.add_argument('--loop', action='store_true', help='Mode boucle automatique toutes les 1h30')
-    parser.add_argument('--interval', type=int, default=5400, help='Intervalle en secondes (défaut: 5400s = 1h30)')
     
     args = parser.parse_args()
     
-    if args.loop:
-        logger.info("=== DÉMARRAGE DU VOTE AUTOMATIQUE EN BOUCLE ===")
-        logger.info(f"Mode headless: {args.headless}")
-        logger.info(f"Intervalle: {args.interval}s ({args.interval//3600}h {(args.interval%3600)//60}min)")
+    logger.info("=== 🚀 DÉMARRAGE DU VOTE AUTOMATIQUE GITHUB ACTIONS ===")
+    logger.info(f"Mode headless: {args.headless}")
+    
+    voter = None
+    try:
+        voter = MTCaptchaVoter(headless=args.headless, timeout=args.timeout)
         
-        vote_count = 0
+        success = voter.vote_oneblock_site1()
         
-        while True:
-            vote_count += 1
-            logger.info(f"\n🔄 === VOTE N°{vote_count} - {time.strftime('%Y-%m-%d %H:%M:%S')} ===")
+        if success:
+            logger.info("🎉 Résultat final: ✅ SUCCÈS")
+            logger.info("=== ✅ VOTE TERMINÉ AVEC SUCCÈS ===")
+            exit(0)  # Code de sortie 0 = succès
+        else:
+            logger.info("❌ Résultat final: ❌ ÉCHEC")
+            logger.info("=== ❌ VOTE ÉCHOUÉ ===")
+            exit(1)  # Code de sortie 1 = échec
             
-            voter = None
-            try:
-                voter = MTCaptchaVoter(headless=args.headless, timeout=args.timeout)
-                
-                success = voter.vote_oneblock_site1()
-                
-                if success:
-                    logger.info(f"✅ Vote N°{vote_count}: SUCCÈS")
-                else:
-                    logger.info(f"❌ Vote N°{vote_count}: ÉCHEC")
-                    
-            except Exception as e:
-                logger.error(f"❌ Vote N°{vote_count} - Erreur fatale: {str(e)}")
-            finally:
-                if voter:
-                    voter.close()
-            
-            # Calculer le temps d'attente jusqu'au prochain vote
-            next_vote_time = time.time() + args.interval
-            next_vote_str = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(next_vote_time))
-            
-            logger.info(f"⏰ Prochain vote prévu à: {next_vote_str}")
-            logger.info(f"⏳ Attente de {args.interval//3600}h {(args.interval%3600)//60}min...")
-            
-            # Attendre avec affichage du temps restant
-            for remaining in range(args.interval, 0, -60):  # Affichage toutes les minutes
-                hours = remaining // 3600
-                minutes = (remaining % 3600) // 60
-                if remaining % 300 == 0 or remaining <= 300:  # Afficher toutes les 5min ou dernières 5min
-                    logger.info(f"⏳ Temps restant: {hours}h {minutes}min")
-                time.sleep(60)
-            
-    else:
-        logger.info("=== DÉMARRAGE DU TEST MTCAPTCHA UNIQUE ===")
-        logger.info(f"Mode headless: {args.headless}")
-        
-        voter = None
-        try:
-            voter = MTCaptchaVoter(headless=args.headless, timeout=args.timeout)
-            
-            success = voter.vote_oneblock_site1()
-            
-            if success:
-                logger.info("Résultat final: ✅ SUCCÈS")
-                logger.info("=== TEST TERMINÉ AVEC SUCCÈS ===")
-            else:
-                logger.info("Résultat final: ❌ ÉCHEC")
-                logger.info("=== TEST ÉCHOUÉ ===")
-                
-        except Exception as e:
-            logger.error(f"❌ Erreur fatale: {str(e)}")
-            logger.info("=== TEST ÉCHOUÉ ===")
-        finally:
-            if voter:
-                voter.close()
+    except Exception as e:
+        logger.error(f"💥 Erreur fatale: {str(e)}")
+        logger.info("=== ❌ VOTE ÉCHOUÉ ===")
+        exit(1)
+    finally:
+        if voter:
+            voter.close()
 
 if __name__ == "__main__":
     main()
