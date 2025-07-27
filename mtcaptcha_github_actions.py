@@ -48,6 +48,11 @@ class MTCaptchaVoter:
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
         
+        # Headers plus réalistes
+        chrome_options.add_argument("--accept-lang=fr-FR,fr;q=0.9,en;q=0.8")
+        chrome_options.add_argument("--accept-encoding=gzip, deflate, br")
+        chrome_options.add_argument("--accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
+        
         logger.info("🔧 Configuration du driver Selenium pour GitHub Actions...")
         try:
             self.driver = webdriver.Chrome(options=chrome_options)
@@ -253,10 +258,14 @@ class MTCaptchaVoter:
             
             # Vérifier et attendre que Cloudflare termine
             cloudflare_attempts = 0
-            max_cloudflare_attempts = 6  # 60 secondes max
+            max_cloudflare_attempts = 12  # 120 secondes max (2 minutes)
             
             while cloudflare_attempts < max_cloudflare_attempts:
-                time.sleep(10)
+                # Délai aléatoire pour éviter la détection de patterns
+                import random
+                delay = random.randint(8, 15)
+                time.sleep(delay)
+                
                 current_url = self.driver.current_url
                 page_source = self.driver.page_source
                 
@@ -264,7 +273,7 @@ class MTCaptchaVoter:
                 
                 # Vérifier si on est encore sur la page Cloudflare
                 if "Just a moment..." in page_source or "_cf_chl_opt" in page_source:
-                    logger.info(f"⏳ Cloudflare en cours... Tentative {cloudflare_attempts+1}/{max_cloudflare_attempts}")
+                    logger.info(f"⏳ Cloudflare en cours... Tentative {cloudflare_attempts+1}/{max_cloudflare_attempts} (délai: {delay}s)")
                     cloudflare_attempts += 1
                     continue
                 else:
