@@ -28,7 +28,7 @@ class MTCaptchaVoter:
         if not self.api_key:
             raise ValueError("❌ API key non trouvée dans .env ! Ajoutez: api_key=votre_clé ou TWOCAPTCHA_API_KEY=votre_clé")
         
-        # Configuration Chrome pour GitHub Actions
+        # Configuration Chrome pour GitHub Actions avec contournement Cloudflare
         chrome_options = Options()
         chrome_options.add_argument("--headless")  # Toujours headless sur GitHub Actions
         chrome_options.add_argument("--no-sandbox")
@@ -37,13 +37,24 @@ class MTCaptchaVoter:
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--disable-extensions")
         chrome_options.add_argument("--disable-plugins")
-        chrome_options.add_argument("--disable-images")  # Économiser de la bande passante
-        chrome_options.add_argument("--disable-javascript")  # Sauf si nécessaire
-        chrome_options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        # Garder JavaScript activé pour Cloudflare
+        # chrome_options.add_argument("--disable-javascript")  # Commenté pour Cloudflare
+        
+        # User agent plus réaliste pour éviter la détection
+        chrome_options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36")
+        
+        # Options pour contourner la détection de bot
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option('useAutomationExtension', False)
         
         logger.info("🔧 Configuration du driver Selenium pour GitHub Actions...")
         try:
             self.driver = webdriver.Chrome(options=chrome_options)
+            
+            # Masquer les propriétés WebDriver pour éviter la détection
+            self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+            
             logger.info("✅ Driver Selenium configuré avec succès")
         except Exception as e:
             logger.error(f"❌ Erreur configuration driver: {e}")
@@ -240,9 +251,29 @@ class MTCaptchaVoter:
             
             logger.info("🌐 Recherche du MTCaptcha sur la page de vote...")
             
-            # Attendre que la page se charge complètement
-            time.sleep(10)
-            logger.info(f"📍 URL après attente: {self.driver.current_url}")
+            # Vérifier et attendre que Cloudflare termine
+            cloudflare_attempts = 0
+            max_cloudflare_attempts = 6  # 60 secondes max
+            
+            while cloudflare_attempts < max_cloudflare_attempts:
+                time.sleep(10)
+                current_url = self.driver.current_url
+                page_source = self.driver.page_source
+                
+                logger.info(f"📍 URL après attente #{cloudflare_attempts+1}: {current_url}")
+                
+                # Vérifier si on est encore sur la page Cloudflare
+                if "Just a moment..." in page_source or "_cf_chl_opt" in page_source:
+                    logger.info(f"⏳ Cloudflare en cours... Tentative {cloudflare_attempts+1}/{max_cloudflare_attempts}")
+                    cloudflare_attempts += 1
+                    continue
+                else:
+                    logger.info("✅ Cloudflare passé, page chargée")
+                    break
+            
+            if cloudflare_attempts >= max_cloudflare_attempts:
+                logger.error("❌ Timeout Cloudflare - impossible d'accéder à la page")
+                return False
             
             # Chercher la sitekey MTCaptcha
             sitekey = None
