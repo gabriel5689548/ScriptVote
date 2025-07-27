@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import requests
+import cloudscraper
 
 # Charger les variables d'environnement
 load_dotenv()
@@ -254,35 +255,60 @@ class MTCaptchaVoter:
             current_url = self.driver.current_url
             logger.info(f"📍 Page de vote détectée: {current_url}")
             
-            logger.info("🌐 Recherche du MTCaptcha sur la page de vote...")
+            # Essayer d'utiliser cloudscraper pour contourner Cloudflare
+            logger.info("🌐 Tentative de contournement Cloudflare avec cloudscraper...")
             
-            # Vérifier et attendre que Cloudflare termine
-            cloudflare_attempts = 0
-            max_cloudflare_attempts = 12  # 120 secondes max (2 minutes)
-            
-            while cloudflare_attempts < max_cloudflare_attempts:
-                # Délai aléatoire pour éviter la détection de patterns
-                import random
-                delay = random.randint(8, 15)
-                time.sleep(delay)
+            try:
+                # Créer une session cloudscraper avec les bonnes pratiques
+                try:
+                    scraper = cloudscraper.create_scraper(
+                        delay=5,  # Délai recommandé pour le premier challenge
+                        disableCloudflareV1=False,  # Garder le support V1
+                        interpreter='js2py'  # Utiliser js2py pour de meilleures performances
+                    )
+                except Exception:
+                    # Fallback si js2py n'est pas disponible
+                    scraper = cloudscraper.create_scraper(
+                        delay=5,
+                        disableCloudflareV1=False
+                    )
                 
-                current_url = self.driver.current_url
-                page_source = self.driver.page_source
+                logger.info("📤 Tentative d'accès à la page avec cloudscraper...")
+                # Laisser cloudscraper gérer automatiquement les headers et user-agent
+                response = scraper.get(current_url, timeout=60)
                 
-                logger.info(f"📍 URL après attente #{cloudflare_attempts+1}: {current_url}")
-                
-                # Vérifier si on est encore sur la page Cloudflare
-                if "Just a moment..." in page_source or "_cf_chl_opt" in page_source:
-                    logger.info(f"⏳ Cloudflare en cours... Tentative {cloudflare_attempts+1}/{max_cloudflare_attempts} (délai: {delay}s)")
-                    cloudflare_attempts += 1
-                    continue
+                if response.status_code == 200:
+                    logger.info("✅ Page récupérée avec cloudscraper, injection du contenu...")
+                    
+                    # Transfert des cookies cloudscraper vers Selenium pour maintenir la session
+                    for cookie in scraper.cookies:
+                        try:
+                            self.driver.add_cookie({
+                                'name': cookie.name,
+                                'value': cookie.value,
+                                'domain': cookie.domain,
+                                'path': cookie.path or '/',
+                                'secure': cookie.secure or False
+                            })
+                        except Exception as e:
+                            logger.debug(f"Erreur ajout cookie {cookie.name}: {e}")
+                    
+                    # Rafraîchir la page avec les nouveaux cookies
+                    self.driver.refresh()
+                    time.sleep(5)
+                    
+                    logger.info("✅ Cookies cloudscraper transférés, Cloudflare contourné")
                 else:
-                    logger.info("✅ Cloudflare passé, page chargée")
-                    break
-            
-            if cloudflare_attempts >= max_cloudflare_attempts:
-                logger.error("❌ Timeout Cloudflare - impossible d'accéder à la page")
-                return False
+                    logger.warning(f"⚠️ Cloudscraper a échoué: status {response.status_code}")
+                    # Continuer avec l'ancienne méthode
+                    if not self._fallback_cloudflare_bypass():
+                        return False
+                    
+            except Exception as e:
+                logger.warning(f"⚠️ Erreur cloudscraper: {e}")
+                # Continuer avec l'ancienne méthode
+                if not self._fallback_cloudflare_bypass():
+                    return False
             
             # Chercher la sitekey MTCaptcha
             sitekey = None
@@ -557,6 +583,46 @@ class MTCaptchaVoter:
                 
         except Exception as e:
             logger.error(f"❌ Erreur générale: {str(e)}")
+            return False
+    
+    def _fallback_cloudflare_bypass(self):
+        """Méthode de fallback pour contourner Cloudflare avec l'ancienne approche"""
+        
+        try:
+            logger.info("🔄 Fallback: Utilisation de l'ancienne méthode Cloudflare...")
+            
+            # Vérifier et attendre que Cloudflare termine
+            cloudflare_attempts = 0
+            max_cloudflare_attempts = 12  # 120 secondes max (2 minutes)
+            
+            while cloudflare_attempts < max_cloudflare_attempts:
+                # Délai aléatoire pour éviter la détection de patterns
+                import random
+                delay = random.randint(8, 15)
+                time.sleep(delay)
+                
+                current_url = self.driver.current_url
+                page_source = self.driver.page_source
+                
+                logger.info(f"📍 URL après attente #{cloudflare_attempts+1}: {current_url}")
+                
+                # Vérifier si on est encore sur la page Cloudflare
+                if "Just a moment..." in page_source or "_cf_chl_opt" in page_source:
+                    logger.info(f"⏳ Cloudflare en cours... Tentative {cloudflare_attempts+1}/{max_cloudflare_attempts} (délai: {delay}s)")
+                    cloudflare_attempts += 1
+                    continue
+                else:
+                    logger.info("✅ Cloudflare passé, page chargée")
+                    break
+            
+            if cloudflare_attempts >= max_cloudflare_attempts:
+                logger.error("❌ Timeout Cloudflare - impossible d'accéder à la page")
+                return False
+                
+            return True
+            
+        except Exception as e:
+            logger.error(f"❌ Erreur dans fallback Cloudflare: {e}")
             return False
     
     def check_cooldown_on_oneblock(self, site1_button):
