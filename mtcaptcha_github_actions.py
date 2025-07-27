@@ -91,15 +91,40 @@ class MTCaptchaVoter:
             # Étape 4: Chercher et cliquer sur le bouton SITE N°1
             logger.info("🔍 Recherche et clic direct sur bouton SITE N°1...")
             
+            # Attendre un peu plus pour que la page se charge complètement
+            time.sleep(3)
+            
             all_buttons = self.driver.find_elements(By.TAG_NAME, "button")
             site1_button = None
             
-            for btn in all_buttons:
-                text = btn.text.strip()
-                if "SITE N°1" in text and "Votez maintenant" in text and btn.is_displayed():
-                    site1_button = btn
-                    logger.info("🎯 Bouton SITE N°1 trouvé")
-                    break
+            logger.info(f"📊 Nombre de boutons trouvés: {len(all_buttons)}")
+            
+            # Debug: afficher tous les boutons trouvés
+            for i, btn in enumerate(all_buttons):
+                try:
+                    text = btn.text.strip()
+                    is_displayed = btn.is_displayed()
+                    logger.info(f"🔍 Bouton {i+1}: '{text}' (visible: {is_displayed})")
+                    
+                    if "SITE N°1" in text and btn.is_displayed():
+                        site1_button = btn
+                        logger.info("🎯 Bouton SITE N°1 trouvé")
+                        break
+                except Exception as e:
+                    logger.warning(f"⚠️ Erreur lecture bouton {i+1}: {e}")
+            
+            # Si pas trouvé avec "Votez maintenant", chercher juste "SITE N°1"
+            if not site1_button:
+                logger.info("🔍 Recherche élargie sans 'Votez maintenant'...")
+                for btn in all_buttons:
+                    try:
+                        text = btn.text.strip()
+                        if "SITE N°1" in text and btn.is_displayed():
+                            site1_button = btn
+                            logger.info(f"🎯 Bouton SITE N°1 trouvé (état: '{text}')")
+                            break
+                    except Exception:
+                        continue
             
             if site1_button:
                 # Mémoriser le nombre d'onglets avant le clic
@@ -215,13 +240,22 @@ class MTCaptchaVoter:
             
             logger.info("🌐 Recherche du MTCaptcha sur la page de vote...")
             
+            # Attendre que la page se charge complètement
+            time.sleep(10)
+            logger.info(f"📍 URL après attente: {self.driver.current_url}")
+            
             # Chercher la sitekey MTCaptcha
             sitekey = None
             try:
                 # Chercher dans les scripts
                 scripts = self.driver.find_elements(By.TAG_NAME, "script")
-                for script in scripts:
+                logger.info(f"📊 Nombre de scripts trouvés: {len(scripts)}")
+                
+                for i, script in enumerate(scripts):
                     script_text = script.get_attribute('innerHTML') or ''
+                    if len(script_text) > 0:
+                        logger.info(f"🔍 Script {i+1}: {script_text[:100]}...")
+                    
                     if 'MTPublic-' in script_text:
                         import re
                         matches = re.findall(r'MTPublic-[a-zA-Z0-9]+', script_text)
@@ -232,16 +266,38 @@ class MTCaptchaVoter:
                 
                 if not sitekey:
                     # Chercher dans les attributs data
+                    logger.info("🔍 Recherche dans les attributs data...")
                     captcha_elements = self.driver.find_elements(By.CSS_SELECTOR, "[data-sitekey], [data-site-key]")
+                    logger.info(f"📊 Éléments avec data-sitekey trouvés: {len(captcha_elements)}")
+                    
                     for elem in captcha_elements:
                         potential_key = elem.get_attribute('data-sitekey') or elem.get_attribute('data-site-key')
+                        logger.info(f"🔍 Sitekey potentielle: {potential_key}")
                         if potential_key and 'MTPublic-' in potential_key:
                             sitekey = potential_key
                             logger.info(f"✅ Sitekey MTCaptcha trouvée dans attribut: {sitekey}")
                             break
                 
                 if not sitekey:
-                    logger.error("❌ Sitekey MTCaptcha non trouvée")
+                    # Debug: afficher le HTML de la page pour comprendre
+                    logger.info("🔍 Debug: Contenu de la page...")
+                    page_source = self.driver.page_source
+                    if 'MTPublic-' in page_source:
+                        logger.info("✅ MTPublic- trouvé dans le HTML")
+                        import re
+                        matches = re.findall(r'MTPublic-[a-zA-Z0-9]+', page_source)
+                        if matches:
+                            sitekey = matches[0]
+                            logger.info(f"✅ Sitekey MTCaptcha trouvée dans HTML: {sitekey}")
+                        else:
+                            logger.warning("⚠️ MTPublic- trouvé mais pas de match regex")
+                    else:
+                        logger.warning("⚠️ MTPublic- non trouvé dans le HTML")
+                        # Afficher les premiers 1000 caractères pour debug
+                        logger.info(f"🔍 Début du HTML: {page_source[:1000]}")
+                
+                if not sitekey:
+                    logger.error("❌ Sitekey MTCaptcha non trouvée après toutes les tentatives")
                     return False
                     
             except Exception as e:
