@@ -130,16 +130,16 @@ jobs:
           for attempt in {1..3}; do
             echo "🔄 Tentative $attempt/3..."
             
-            # Essayer d'abord avec SeleniumBase UC Mode
-            if timeout 300 python3 mtcaptcha_seleniumbase.py --headless; then
-              echo "🎉 Vote réussi avec SeleniumBase!"
+            # Essayer d'abord avec le nouveau script Cloudflare Bypass
+            if timeout 300 python3 mtcaptcha_cloudflare_bypass.py --headless; then
+              echo "🎉 Vote réussi avec Cloudflare Bypass!"
               echo "VOTE_SUCCESS=true" >> $GITHUB_ENV
               break
             fi
             
-            # Si échec, essayer avec Selenium Stealth
-            if timeout 300 python3 mtcaptcha_stealth.py --headless; then
-              echo "🎉 Vote réussi avec Selenium Stealth!"
+            # Si échec, essayer avec SeleniumBase UC Mode
+            if timeout 300 python3 mtcaptcha_seleniumbase.py --headless; then
+              echo "🎉 Vote réussi avec SeleniumBase!"
               echo "VOTE_SUCCESS=true" >> $GITHUB_ENV
               break
             fi
