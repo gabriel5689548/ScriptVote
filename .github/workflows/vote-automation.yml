@@ -31,7 +31,7 @@ on:
 jobs:
   vote:
     runs-on: ubuntu-latest
-    timeout-minutes: 15 # Limite de sécurité pour éviter les blocages
+    timeout-minutes: 10 # Réduit pour éviter les annulations pendant Cloudflare
 
     steps:
       - name: 📥 Checkout repository
@@ -126,23 +126,31 @@ jobs:
           echo "⏰ Heure actuelle: $(date)"
           echo "🌍 Timezone: $(date +%Z)"
 
-          # Lancer le script avec retry automatique
+          # Lancer le script avec retry automatique et timeout
           for attempt in {1..3}; do
             echo "🔄 Tentative $attempt/3..."
             
-            if python3 mtcaptcha_github_actions.py --headless; then
+            # Utiliser timeout pour limiter chaque tentative à 5 minutes
+            if timeout 300 python3 mtcaptcha_github_actions.py --headless; then
               echo "🎉 Vote réussi à la tentative $attempt"
               echo "VOTE_SUCCESS=true" >> $GITHUB_ENV
               break
             else
-              echo "❌ Échec à la tentative $attempt"
+              exit_code=$?
+              echo "❌ Échec à la tentative $attempt (code: $exit_code)"
+              
+              # Si c'est un timeout (code 124), le mentionner
+              if [ $exit_code -eq 124 ]; then
+                echo "⏱️ Timeout après 5 minutes"
+              fi
+              
               if [ $attempt -lt 3 ]; then
-                echo "⏳ Attente de 30 secondes avant la prochaine tentative..."
-                sleep 30
+                echo "⏳ Attente de 20 secondes avant la prochaine tentative..."
+                sleep 20
               else
                 echo "💥 Toutes les tentatives ont échoué"
                 echo "VOTE_SUCCESS=false" >> $GITHUB_ENV
-                exit 1
+                # Ne pas faire exit 1 pour permettre l'upload des artifacts
               fi
             fi
           done
@@ -173,6 +181,7 @@ jobs:
           name: vote-failure-${{ github.run_number }}
           path: |
             *.log
+            *.png
             screenshots/
           retention-days: 7
 

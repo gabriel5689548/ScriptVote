@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 class MTCaptchaVoter:
     def __init__(self, headless=True, timeout=120):
         self.timeout = timeout
+        self.screenshot_count = 0
         # Compatible avec les deux formats d'API key
         self.api_key = os.getenv('api_key') or os.getenv('TWOCAPTCHA_API_KEY')
         self.username = os.getenv('username', 'zCapsLock')  # Par défaut zCapsLock
@@ -65,6 +66,18 @@ class MTCaptchaVoter:
         except Exception as e:
             logger.error(f"❌ Erreur configuration driver: {e}")
             raise
+    
+    def save_screenshot(self, name):
+        """Sauvegarde un screenshot avec un nom unique"""
+        try:
+            self.screenshot_count += 1
+            filename = f"{name}_{self.screenshot_count}_{int(time.time())}.png"
+            self.driver.save_screenshot(filename)
+            logger.info(f"📸 Screenshot sauvegardé: {filename}")
+            return filename
+        except Exception as e:
+            logger.warning(f"⚠️ Impossible de sauvegarder le screenshot: {e}")
+            return None
     
     def vote_oneblock_site1(self):
         """Vote pour le SITE N°1 sur oneblock.fr - Version GitHub Actions"""
@@ -237,8 +250,18 @@ class MTCaptchaVoter:
                 
                 if not new_tab_opened:
                     logger.warning("⚠️ Aucun nouvel onglet détecté après 10s")
+                    # Essayer de continuer directement sur la page actuelle
+                    logger.info("🔄 Tentative de vote sur la page actuelle...")
+                    current_url = self.driver.current_url
+                    if "serveur-prive.net" in current_url or "vote" in current_url:
+                        vote_result = self.continue_vote_on_any_page()
+                        if vote_result:
+                            logger.info("🎉 Vote réussi sur la page actuelle!")
+                            return True
             else:
                 logger.warning("⚠️ Bouton SITE N°1 'Votez maintenant' non trouvé")
+                # Capturer la page pour debug
+                self.save_screenshot("bouton_site1_non_trouve")
             
             # Si aucun nouvel onglet ne s'ouvre, le vote a peut-être échoué
             logger.warning("⚠️ Aucun nouvel onglet détecté, vote probablement échoué")
@@ -246,6 +269,7 @@ class MTCaptchaVoter:
             
         except Exception as e:
             logger.error(f"❌ Erreur dans vote_oneblock_site1: {str(e)}")
+            self.save_screenshot("erreur_vote_oneblock")
             return False
     
     def continue_vote_on_any_page(self):
@@ -258,54 +282,120 @@ class MTCaptchaVoter:
             # Essayer d'utiliser cloudscraper pour contourner Cloudflare
             logger.info("🌐 Tentative de contournement Cloudflare avec cloudscraper...")
             
+            # Vérifier d'abord si on est face à Cloudflare
+            page_source = self.driver.page_source
+            if "Cloudflare" in page_source or "_cf_chl_opt" in page_source or "Just a moment..." in page_source:
+                logger.info("🛡️ Protection Cloudflare détectée, tentative de contournement...")
+            
             try:
-                # Créer une session cloudscraper avec les bonnes pratiques
+                # Créer une session cloudscraper avec configuration améliorée
                 try:
                     scraper = cloudscraper.create_scraper(
-                        delay=5,  # Délai recommandé pour le premier challenge
-                        disableCloudflareV1=False,  # Garder le support V1
-                        interpreter='js2py'  # Utiliser js2py pour de meilleures performances
+                        delay=10,  # Délai plus long pour éviter la détection
+                        browser={
+                            'browser': 'chrome',
+                            'platform': 'linux',
+                            'desktop': True,
+                            'mobile': False
+                        },
+                        disableCloudflareV1=False,
+                        interpreter='js2py'
                     )
-                except Exception:
-                    # Fallback si js2py n'est pas disponible
+                except Exception as e:
+                    logger.warning(f"⚠️ js2py non disponible: {e}, utilisation du fallback")
+                    # Fallback avec configuration plus robuste
                     scraper = cloudscraper.create_scraper(
-                        delay=5,
+                        delay=10,
+                        browser={
+                            'browser': 'chrome',
+                            'platform': 'linux',
+                            'desktop': True
+                        },
                         disableCloudflareV1=False
                     )
                 
+                # Ajouter des headers supplémentaires pour ressembler à un vrai navigateur
+                headers = {
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Accept-Language': 'fr-FR,fr;q=0.9,en;q=0.8',
+                    'Accept-Encoding': 'gzip, deflate, br',
+                    'DNT': '1',
+                    'Connection': 'keep-alive',
+                    'Upgrade-Insecure-Requests': '1'
+                }
+                
                 logger.info("📤 Tentative d'accès à la page avec cloudscraper...")
-                # Laisser cloudscraper gérer automatiquement les headers et user-agent
-                response = scraper.get(current_url, timeout=60)
+                # Essayer plusieurs fois avec différents délais
+                max_retries = 3
+                for retry in range(max_retries):
+                    try:
+                        response = scraper.get(current_url, headers=headers, timeout=30)
+                        if response.status_code == 200:
+                            break
+                        elif response.status_code == 403:
+                            logger.warning(f"⚠️ Tentative {retry+1}/{max_retries} - Status 403, nouvel essai dans 5s...")
+                            time.sleep(5)
+                        else:
+                            logger.warning(f"⚠️ Tentative {retry+1}/{max_retries} - Status {response.status_code}")
+                    except Exception as e:
+                        logger.warning(f"⚠️ Erreur tentative {retry+1}/{max_retries}: {e}")
+                        if retry < max_retries - 1:
+                            time.sleep(5)
                 
                 if response.status_code == 200:
                     logger.info("✅ Page récupérée avec cloudscraper, injection du contenu...")
                     
-                    # Transfert des cookies cloudscraper vers Selenium pour maintenir la session
-                    for cookie in scraper.cookies:
-                        try:
-                            self.driver.add_cookie({
-                                'name': cookie.name,
-                                'value': cookie.value,
-                                'domain': cookie.domain,
-                                'path': cookie.path or '/',
-                                'secure': cookie.secure or False
-                            })
-                        except Exception as e:
-                            logger.debug(f"Erreur ajout cookie {cookie.name}: {e}")
-                    
-                    # Rafraîchir la page avec les nouveaux cookies
-                    self.driver.refresh()
-                    time.sleep(5)
-                    
-                    logger.info("✅ Cookies cloudscraper transférés, Cloudflare contourné")
+                    # Vérifier que ce n'est pas une page Cloudflare
+                    if "Cloudflare" in response.text or "_cf_chl_opt" in response.text:
+                        logger.warning("⚠️ La réponse contient encore Cloudflare, passage au fallback")
+                        if not self._fallback_cloudflare_bypass():
+                            return False
+                    else:
+                        # Transfert des cookies cloudscraper vers Selenium pour maintenir la session
+                        self.driver.delete_all_cookies()  # Nettoyer d'abord
+                        
+                        for cookie in scraper.cookies:
+                            try:
+                                cookie_dict = {
+                                    'name': cookie.name,
+                                    'value': cookie.value,
+                                    'path': cookie.path or '/'
+                                }
+                                if cookie.domain:
+                                    cookie_dict['domain'] = cookie.domain
+                                if hasattr(cookie, 'secure'):
+                                    cookie_dict['secure'] = cookie.secure
+                                    
+                                self.driver.add_cookie(cookie_dict)
+                            except Exception as e:
+                                logger.debug(f"Cookie {cookie.name} ignoré: {e}")
+                        
+                        # Rafraîchir la page avec les nouveaux cookies
+                        self.driver.refresh()
+                        time.sleep(3)
+                        
+                        # Vérifier que la page est bien chargée
+                        current_page = self.driver.page_source
+                        if "Cloudflare" not in current_page and "_cf_chl_opt" not in current_page:
+                            logger.info("✅ Cloudflare contourné avec succès")
+                        else:
+                            logger.warning("⚠️ Cloudflare toujours présent après refresh, passage au fallback")
+                            if not self._fallback_cloudflare_bypass():
+                                return False
                 else:
-                    logger.warning(f"⚠️ Cloudscraper a échoué: status {response.status_code}")
+                    logger.warning(f"⚠️ Cloudscraper a échoué après {max_retries} tentatives: status {response.status_code}")
+                    # Capturer un screenshot pour debug
+                    self.save_screenshot("cloudflare_error")
+                    
                     # Continuer avec l'ancienne méthode
                     if not self._fallback_cloudflare_bypass():
                         return False
                     
             except Exception as e:
                 logger.warning(f"⚠️ Erreur cloudscraper: {e}")
+                # Capturer un screenshot pour debug
+                self.save_screenshot("cloudscraper_exception")
+                    
                 # Continuer avec l'ancienne méthode
                 if not self._fallback_cloudflare_bypass():
                     return False
@@ -364,6 +454,7 @@ class MTCaptchaVoter:
                 
                 if not sitekey:
                     logger.error("❌ Sitekey MTCaptcha non trouvée après toutes les tentatives")
+                    self.save_screenshot("sitekey_non_trouvee")
                     return False
                     
             except Exception as e:
@@ -583,6 +674,7 @@ class MTCaptchaVoter:
                 
         except Exception as e:
             logger.error(f"❌ Erreur générale: {str(e)}")
+            self.save_screenshot("erreur_generale_vote")
             return False
     
     def _fallback_cloudflare_bypass(self):
@@ -593,12 +685,12 @@ class MTCaptchaVoter:
             
             # Vérifier et attendre que Cloudflare termine
             cloudflare_attempts = 0
-            max_cloudflare_attempts = 12  # 120 secondes max (2 minutes)
+            max_cloudflare_attempts = 6  # Réduit à 60 secondes max pour éviter timeout GitHub Actions
             
             while cloudflare_attempts < max_cloudflare_attempts:
-                # Délai aléatoire pour éviter la détection de patterns
+                # Délai aléatoire plus court pour éviter timeout
                 import random
-                delay = random.randint(8, 15)
+                delay = random.randint(5, 10)
                 time.sleep(delay)
                 
                 current_url = self.driver.current_url
@@ -607,9 +699,23 @@ class MTCaptchaVoter:
                 logger.info(f"📍 URL après attente #{cloudflare_attempts+1}: {current_url}")
                 
                 # Vérifier si on est encore sur la page Cloudflare
-                if "Just a moment..." in page_source or "_cf_chl_opt" in page_source:
+                cloudflare_indicators = [
+                    "Just a moment...",
+                    "_cf_chl_opt",
+                    "Cloudflare",
+                    "cf-browser-verification",
+                    "Checking your browser"
+                ]
+                
+                is_cloudflare = any(indicator in page_source for indicator in cloudflare_indicators)
+                
+                if is_cloudflare:
                     logger.info(f"⏳ Cloudflare en cours... Tentative {cloudflare_attempts+1}/{max_cloudflare_attempts} (délai: {delay}s)")
                     cloudflare_attempts += 1
+                    
+                    # Si on approche de la limite, capturer un screenshot
+                    if cloudflare_attempts == max_cloudflare_attempts - 1:
+                        self.save_screenshot("cloudflare_stuck")
                     continue
                 else:
                     logger.info("✅ Cloudflare passé, page chargée")
@@ -617,6 +723,20 @@ class MTCaptchaVoter:
             
             if cloudflare_attempts >= max_cloudflare_attempts:
                 logger.error("❌ Timeout Cloudflare - impossible d'accéder à la page")
+                # Dernière tentative avec JavaScript
+                try:
+                    logger.info("🔄 Tentative finale: exécution JavaScript pour passer Cloudflare")
+                    self.driver.execute_script("if(typeof turnstile !== 'undefined' && turnstile.execute) { turnstile.execute(); }")
+                    time.sleep(5)
+                    
+                    # Vérifier une dernière fois
+                    final_page = self.driver.page_source
+                    if not any(indicator in final_page for indicator in cloudflare_indicators):
+                        logger.info("✅ Cloudflare passé avec JavaScript!")
+                        return True
+                except Exception as e:
+                    logger.debug(f"Tentative JavaScript échouée: {e}")
+                
                 return False
                 
             return True
