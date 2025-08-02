@@ -1,10 +1,11 @@
 # GitHub Actions Vote Automation Dependencies
-selenium==4.15.2
+seleniumbase==4.31.0  # Inclut UC Mode pour contourner Cloudflare
+selenium-stealth==1.0.6  # Masquer les traces d'automatisation
 requests==2.31.0
 python-dotenv==1.0.0
 cloudscraper==1.2.71
 js2py==0.74  # Pour cloudscraper JavaScript execution
-undetected-chromedriver==3.5.5  # Alternative pour contourner les détections
+undetected-chromedriver==3.5.5  # Backup si SeleniumBase échoue
 
 # Optionnel: Pour de meilleures performances
 urllib3==2.0.7
