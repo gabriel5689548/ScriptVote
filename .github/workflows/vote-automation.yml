@@ -158,7 +158,7 @@ jobs:
         retention-days: 7
     
     - name: 🔔 Notify on failure (optionnel)
-      if: failure() && secrets.DISCORD_WEBHOOK
+      if: failure() && ${{ secrets.DISCORD_WEBHOOK != '' }}
       run: |
         curl -X POST -H 'Content-type: application/json' \
         --data "{\"content\":\"❌ Vote automation failed at $(date)\\nWorkflow: ${{ github.workflow }}\\nRun: ${{ github.run_id }}\"}" \
