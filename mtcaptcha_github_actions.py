@@ -28,15 +28,16 @@ class MTCaptchaVoter:
         if not self.api_key:
             raise ValueError("❌ API key non trouvée dans .env ! Ajoutez: api_key=votre_clé ou TWOCAPTCHA_API_KEY=votre_clé")
         
-        # Configuration Chrome pour GitHub Actions
+        # Configuration Chrome pour GitHub Actions avec anti-détection
         chrome_options = Options()
         chrome_options.add_argument("--headless")  # Toujours headless sur GitHub Actions
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--window-size=1920,1080")
-        chrome_options.add_argument("--disable-extensions")
-        chrome_options.add_argument("--disable-plugins")
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option('useAutomationExtension', False)
         chrome_options.add_argument("--disable-images")  # Économiser de la bande passante
         # JavaScript est nécessaire pour MTCaptcha
         chrome_options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
@@ -44,6 +45,28 @@ class MTCaptchaVoter:
         logger.info("🔧 Configuration du driver Selenium pour GitHub Actions...")
         try:
             self.driver = webdriver.Chrome(options=chrome_options)
+            
+            # Injection de scripts anti-détection
+            self.driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
+                'source': '''
+                    Object.defineProperty(navigator, 'webdriver', {
+                        get: () => undefined
+                    });
+                    Object.defineProperty(navigator, 'plugins', {
+                        get: () => [1, 2, 3, 4, 5]
+                    });
+                    Object.defineProperty(navigator, 'languages', {
+                        get: () => ['fr-FR', 'fr', 'en-US', 'en']
+                    });
+                    window.chrome = {
+                        runtime: {}
+                    };
+                    Object.defineProperty(navigator, 'permissions', {
+                        get: () => ({ query: () => Promise.resolve({ state: 'granted' }) })
+                    });
+                '''
+            })
+            
             logger.info("✅ Driver Selenium configuré avec succès")
         except Exception as e:
             logger.error(f"❌ Erreur configuration driver: {e}")
@@ -188,10 +211,23 @@ class MTCaptchaVoter:
                 logger.info(f"🔍 Contenu page (100 premiers chars): {page_text[:100]}...")
                 
                 # Vérifier si Cloudflare est toujours présent
-                if "just a moment" in current_title.lower() or "cloudflare" in page_text:
+                if "just a moment" in current_title.lower() or "verifying you are human" in page_text:
                     logger.info(f"⏳ Cloudflare détecté, attente... ({cloudflare_wait}/{max_cloudflare_wait}s)")
+                    
+                    # Essayer de cliquer si un bouton de vérification existe
+                    try:
+                        verify_button = self.driver.find_element(By.XPATH, "//button[contains(text(), 'Verify') or contains(@class, 'cf-challenge')]")
+                        if verify_button.is_displayed():
+                            verify_button.click()
+                            logger.info("🖱️ Clic sur bouton de vérification Cloudflare")
+                    except:
+                        pass
+                    
                     time.sleep(2)
                     cloudflare_wait += 2
+                elif "oneblockbyrivrs" in current_url or "vote" in current_title.lower():
+                    logger.info("✅ Page de vote chargée!")
+                    break
                 else:
                     logger.info("✅ Page chargée (Cloudflare passé ou absent)")
                     break
