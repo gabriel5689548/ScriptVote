@@ -38,7 +38,7 @@ class MTCaptchaVoter:
         chrome_options.add_argument("--disable-extensions")
         chrome_options.add_argument("--disable-plugins")
         chrome_options.add_argument("--disable-images")  # Économiser de la bande passante
-        chrome_options.add_argument("--disable-javascript")  # Sauf si nécessaire
+        # JavaScript est nécessaire pour MTCaptcha
         chrome_options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
         
         logger.info("🔧 Configuration du driver Selenium pour GitHub Actions...")

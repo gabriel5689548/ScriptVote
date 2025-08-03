@@ -108,7 +108,7 @@ jobs:
       run: |
         echo "🚀 Démarrage du vote automatique..."
         echo "⏰ Heure actuelle: $(date)"
-        echo "🌍 Timezone: $(timedatezone)"
+        echo "🌍 Timezone: $TZ"
         
         # Lancer le script avec retry automatique
         for attempt in {1..3}; do
