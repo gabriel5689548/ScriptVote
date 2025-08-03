@@ -173,6 +173,10 @@ class MTCaptchaVoter:
             current_url = self.driver.current_url
             logger.info(f"📍 Page de vote détectée: {current_url}")
             
+            # Attendre que la page se charge complètement
+            logger.info("⏳ Attente du chargement complet de la page...")
+            time.sleep(5)
+            
             logger.info("🌐 Recherche du MTCaptcha sur la page de vote...")
             
             # Chercher la sitekey MTCaptcha
@@ -201,7 +205,37 @@ class MTCaptchaVoter:
                             break
                 
                 if not sitekey:
+                    # Méthode alternative: chercher dans les iframes
+                    iframes = self.driver.find_elements(By.TAG_NAME, "iframe")
+                    for iframe in iframes:
+                        src = iframe.get_attribute('src') or ''
+                        if 'mtcaptcha' in src.lower():
+                            import re
+                            matches = re.findall(r'k=([A-Za-z0-9\-]+)', src)
+                            if matches:
+                                sitekey = matches[0]
+                                logger.info(f"✅ Sitekey trouvée dans iframe: {sitekey}")
+                                break
+                
+                if not sitekey:
+                    # Dernière tentative: chercher des patterns MTCaptcha dans toute la page
+                    page_source = self.driver.page_source
+                    import re
+                    matches = re.findall(r'(MTPublic-[a-zA-Z0-9]+|[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})', page_source)
+                    if matches:
+                        for match in matches:
+                            if 'MTPublic' in match or len(match) == 36:  # UUID format
+                                sitekey = match
+                                logger.info(f"✅ Sitekey trouvée dans page source: {sitekey}")
+                                break
+                
+                if not sitekey:
                     logger.error("❌ Sitekey MTCaptcha non trouvée")
+                    # Log some debug info
+                    logger.info("📄 Titre de la page: " + self.driver.title)
+                    # Check if Cloudflare is blocking
+                    if "cloudflare" in self.driver.page_source.lower() or "checking your browser" in self.driver.page_source.lower():
+                        logger.error("🛡️ Cloudflare détecté! La page est protégée.")
                     return False
                     
             except Exception as e:
