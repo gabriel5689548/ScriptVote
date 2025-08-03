@@ -4,190 +4,162 @@ on:
   schedule:
     # Vote 24/7 toutes les 1h30 (16 votes par jour)
     # Utilise environ 2400 minutes/mois sur les 3000 disponibles avec GitHub Pro
-    - cron: "0 0 * * *" # 00h00
-    - cron: "30 1 * * *" # 01h30
-    - cron: "0 3 * * *" # 03h00
-    - cron: "30 4 * * *" # 04h30
-    - cron: "0 6 * * *" # 06h00
-    - cron: "30 7 * * *" # 07h30
-    - cron: "0 9 * * *" # 09h00
-    - cron: "30 10 * * *" # 10h30
-    - cron: "0 12 * * *" # 12h00
-    - cron: "30 13 * * *" # 13h30
-    - cron: "0 15 * * *" # 15h00
-    - cron: "30 16 * * *" # 16h30
-    - cron: "0 18 * * *" # 18h00
-    - cron: "30 19 * * *" # 19h30
-    - cron: "0 21 * * *" # 21h00
-    - cron: "30 22 * * *" # 22h30
-
-  workflow_dispatch: # Permet de déclencher manuellement pour les tests
+    - cron: '0 0 * * *'     # 00h00
+    - cron: '30 1 * * *'    # 01h30  
+    - cron: '0 3 * * *'     # 03h00
+    - cron: '30 4 * * *'    # 04h30
+    - cron: '0 6 * * *'     # 06h00
+    - cron: '30 7 * * *'    # 07h30
+    - cron: '0 9 * * *'     # 09h00
+    - cron: '30 10 * * *'   # 10h30
+    - cron: '0 12 * * *'    # 12h00
+    - cron: '30 13 * * *'   # 13h30
+    - cron: '0 15 * * *'    # 15h00
+    - cron: '30 16 * * *'   # 16h30
+    - cron: '0 18 * * *'    # 18h00
+    - cron: '30 19 * * *'   # 19h30
+    - cron: '0 21 * * *'    # 21h00
+    - cron: '30 22 * * *'   # 22h30
+  
+  workflow_dispatch:  # Permet de déclencher manuellement pour les tests
     inputs:
       test_mode:
-        description: "Mode test (true/false)"
+        description: 'Mode test (true/false)'
         required: false
-        default: "false"
+        default: 'false'
 
 jobs:
   vote:
     runs-on: ubuntu-latest
-    timeout-minutes: 15 # Limite de sécurité pour éviter les blocages
-
+    timeout-minutes: 15  # Limite de sécurité pour éviter les blocages
+    
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 🐍 Setup Python 3.9
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
-
-      - name: 📦 Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: 🔧 Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip xvfb
-
-      - name: 🌐 Install Google Chrome
-        run: |
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-          # Vérifier l'installation
-          google-chrome --version
-
-      - name: 🚗 Install ChromeDriver
-        run: |
-          # Obtenir la version exacte de Chrome installée
-          CHROME_VERSION=$(google-chrome --version | cut -d " " -f3)
-          echo "Chrome version detected: $CHROME_VERSION"
-
-          # Utiliser la même version pour ChromeDriver
-          CHROMEDRIVER_VERSION="$CHROME_VERSION"
-          echo "Downloading ChromeDriver version: $CHROMEDRIVER_VERSION"
-
-          # Télécharger depuis la nouvelle API Chrome for Testing
-          wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
-
-          # Vérifier si le téléchargement a réussi, sinon utiliser une version de fallback
-          if [ $? -ne 0 ]; then
-            echo "❌ Version exacte non trouvée, tentative avec version 138.0.7204.168"
-            CHROMEDRIVER_VERSION="138.0.7204.168"
-            wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
-          fi
-
-          # Si ça échoue encore, utiliser la dernière version stable 138
-          if [ $? -ne 0 ]; then
-            echo "❌ Tentative avec version stable 138"
-            CHROMEDRIVER_VERSION="138.0.7204.169"
-            wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
-          fi
-
-          # Extraire et installer
-          sudo unzip /tmp/chromedriver.zip -d /tmp/
-          sudo mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-
-          # Vérifier l'installation
-          chromedriver --version
-
-      - name: 📚 Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: 🔑 Use existing .env file
-        run: |
-          # Vérifier que le fichier .env existe et contient l'API key
-          if [ ! -f .env ]; then
-            echo "❌ ERREUR: Fichier .env non trouvé"
-            exit 1
-          fi
-
-          if ! grep -q "api_key\|TWOCAPTCHA_API_KEY" .env; then
-            echo "❌ ERREUR: API key non trouvée dans .env"
-            exit 1
-          fi
-
-          echo "✅ Fichier .env trouvé et valide"
-
-      - name: 🗳️ Execute vote script
-        run: |
-          echo "🚀 Démarrage du vote automatique..."
-          echo "⏰ Heure actuelle: $(date)"
-          echo "🌍 Timezone: $(date +%Z)"
-
-          # Lancer le script avec retry automatique
-          for attempt in {1..3}; do
-            echo "🔄 Tentative $attempt/3..."
-            
-            if python3 mtcaptcha_github_actions.py --headless; then
-              echo "🎉 Vote réussi à la tentative $attempt"
-              echo "VOTE_SUCCESS=true" >> $GITHUB_ENV
-              break
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: 🐍 Setup Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: 📦 Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: 🔧 Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget unzip xvfb
+    
+    - name: 🌐 Install Google Chrome
+      run: |
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+        
+        # Vérifier l'installation
+        google-chrome --version
+    
+    - name: 🚗 Install ChromeDriver
+      run: |
+        # Obtenir la version de Chrome installée
+        CHROME_VERSION=$(google-chrome --version | cut -d " " -f3 | cut -d "." -f1-3)
+        echo "Chrome version: $CHROME_VERSION"
+        
+        # Obtenir la version compatible de ChromeDriver
+        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
+        
+        # Télécharger et installer ChromeDriver
+        wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+        sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+        
+        # Vérifier l'installation
+        chromedriver --version
+    
+    - name: 📚 Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: 🔑 Create .env file from secrets
+      run: |
+        echo "api_key=${{ secrets.CAPTCHA_API_KEY }}" > .env
+        echo "username=${{ secrets.USERNAME }}" >> .env
+        
+        # Vérifier que les secrets sont bien configurés
+        if [ -z "${{ secrets.CAPTCHA_API_KEY }}" ]; then
+          echo "❌ ERREUR: CAPTCHA_API_KEY non configuré dans les secrets GitHub"
+          exit 1
+        fi
+        
+        echo "✅ Fichier .env créé avec succès"
+    
+    - name: 🗳️ Execute vote script
+      run: |
+        echo "🚀 Démarrage du vote automatique..."
+        echo "⏰ Heure actuelle: $(date)"
+        echo "🌍 Timezone: $(timedatezone)"
+        
+        # Lancer le script avec retry automatique
+        for attempt in {1..3}; do
+          echo "🔄 Tentative $attempt/3..."
+          
+          if python3 mtcaptcha_github_actions.py --headless; then
+            echo "🎉 Vote réussi à la tentative $attempt"
+            echo "VOTE_SUCCESS=true" >> $GITHUB_ENV
+            break
+          else
+            echo "❌ Échec à la tentative $attempt"
+            if [ $attempt -lt 3 ]; then
+              echo "⏳ Attente de 30 secondes avant la prochaine tentative..."
+              sleep 30
             else
-              echo "❌ Échec à la tentative $attempt"
-              if [ $attempt -lt 3 ]; then
-                echo "⏳ Attente de 30 secondes avant la prochaine tentative..."
-                sleep 30
-              else
-                echo "💥 Toutes les tentatives ont échoué"
-                echo "VOTE_SUCCESS=false" >> $GITHUB_ENV
-                exit 1
-              fi
+              echo "💥 Toutes les tentatives ont échoué"
+              echo "VOTE_SUCCESS=false" >> $GITHUB_ENV
+              exit 1
             fi
-          done
-        env:
-          DISPLAY: ":99"
-          PYTHONUNBUFFERED: "1"
-
-      - name: 📊 Job Summary
-        if: always()
-        run: |
-          echo "## 🗳️ Vote Automation Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Date/Heure**: $(date)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Résultat**: ${{ env.VOTE_SUCCESS == 'true' && '✅ Succès' || '❌ Échec' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Runner**: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
-
-          if [ "${{ env.VOTE_SUCCESS }}" = "true" ]; then
-            echo "- **Status**: 🎉 Vote effectué avec succès" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- **Status**: ⚠️ Vote échoué - vérifier les logs" >> $GITHUB_STEP_SUMMARY
           fi
-
-      - name: 📸 Upload screenshots on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: vote-failure-${{ github.run_number }}
-          path: |
-            *.log
-            screenshots/
-          retention-days: 7
-
-      - name: 🔔 Notify on failure (optionnel)
-        if: failure()
-        run: |
-          # Vérifier si un webhook Discord est configuré dans .env
-          if [ -f .env ] && grep -q "DISCORD_WEBHOOK" .env; then
-            DISCORD_WEBHOOK=$(grep "DISCORD_WEBHOOK" .env | cut -d'=' -f2)
-            if [ -n "$DISCORD_WEBHOOK" ]; then
-              curl -X POST -H 'Content-type: application/json' \
-              --data "{\"content\":\"❌ Vote automation failed at $(date)\\nWorkflow: ${{ github.workflow }}\\nRun: ${{ github.run_id }}\"}" \
-              "$DISCORD_WEBHOOK"
-              echo "Notification Discord envoyée"
-            fi
-          else
-            echo "Discord webhook not configured, skipping notification"
-          fi
+        done
+      env:
+        DISPLAY: ':99'
+        PYTHONUNBUFFERED: '1'
+    
+    - name: 📊 Job Summary
+      if: always()
+      run: |
+        echo "## 🗳️ Vote Automation Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Date/Heure**: $(date)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Résultat**: ${{ env.VOTE_SUCCESS == 'true' && '✅ Succès' || '❌ Échec' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Runner**: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ env.VOTE_SUCCESS }}" = "true" ]; then
+          echo "- **Status**: 🎉 Vote effectué avec succès" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Status**: ⚠️ Vote échoué - vérifier les logs" >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: 📸 Upload screenshots on failure
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: vote-failure-${{ github.run_number }}
+        path: |
+          *.log
+          screenshots/
+        retention-days: 7
+    
+    - name: 🔔 Notify on failure (optionnel)
+      if: failure() && secrets.DISCORD_WEBHOOK
+      run: |
+        curl -X POST -H 'Content-type: application/json' \
+        --data "{\"content\":\"❌ Vote automation failed at $(date)\\nWorkflow: ${{ github.workflow }}\\nRun: ${{ github.run_id }}\"}" \
+        ${{ secrets.DISCORD_WEBHOOK }}

@@ -91,40 +91,15 @@ class MTCaptchaVoter:
             # Étape 4: Chercher et cliquer sur le bouton SITE N°1
             logger.info("🔍 Recherche et clic direct sur bouton SITE N°1...")
             
-            # Attendre un peu plus pour que la page se charge complètement
-            time.sleep(3)
-            
             all_buttons = self.driver.find_elements(By.TAG_NAME, "button")
             site1_button = None
             
-            logger.info(f"📊 Nombre de boutons trouvés: {len(all_buttons)}")
-            
-            # Debug: afficher tous les boutons trouvés
-            for i, btn in enumerate(all_buttons):
-                try:
-                    text = btn.text.strip()
-                    is_displayed = btn.is_displayed()
-                    logger.info(f"🔍 Bouton {i+1}: '{text}' (visible: {is_displayed})")
-                    
-                    if "SITE N°1" in text and btn.is_displayed():
-                        site1_button = btn
-                        logger.info("🎯 Bouton SITE N°1 trouvé")
-                        break
-                except Exception as e:
-                    logger.warning(f"⚠️ Erreur lecture bouton {i+1}: {e}")
-            
-            # Si pas trouvé avec "Votez maintenant", chercher juste "SITE N°1"
-            if not site1_button:
-                logger.info("🔍 Recherche élargie sans 'Votez maintenant'...")
-                for btn in all_buttons:
-                    try:
-                        text = btn.text.strip()
-                        if "SITE N°1" in text and btn.is_displayed():
-                            site1_button = btn
-                            logger.info(f"🎯 Bouton SITE N°1 trouvé (état: '{text}')")
-                            break
-                    except Exception:
-                        continue
+            for btn in all_buttons:
+                text = btn.text.strip()
+                if "SITE N°1" in text and "Votez maintenant" in text and btn.is_displayed():
+                    site1_button = btn
+                    logger.info("🎯 Bouton SITE N°1 trouvé")
+                    break
             
             if site1_button:
                 # Mémoriser le nombre d'onglets avant le clic
@@ -161,48 +136,8 @@ class MTCaptchaVoter:
                                 self.driver.close()
                                 self.driver.switch_to.window(original_tab)
                                 logger.info("🔄 Retour à l'onglet oneblock.fr")
-                                
-                                # Si le vote a réussi sur serveur-prive.net, on considère que c'est un succès
-                                if vote_result:
-                                    logger.info("🎉 Vote confirmé sur serveur-prive.net!")
-                                    
-                                    # Essayer de rafraîchir la page oneblock.fr pour forcer la synchronisation
-                                    logger.info("🔄 Rafraîchissement de oneblock.fr pour synchronisation...")
-                                    self.driver.refresh()
-                                    time.sleep(5)
-                                    
-                                    # Rechercher à nouveau le bouton Site N°1 après rafraîchissement
-                                    try:
-                                        all_buttons = self.driver.find_elements(By.TAG_NAME, "button")
-                                        refreshed_site1_button = None
-                                        
-                                        for btn in all_buttons:
-                                            text = btn.text.strip()
-                                            if "SITE N°1" in text and btn.is_displayed():
-                                                refreshed_site1_button = btn
-                                                logger.info(f"🔍 Bouton Site N°1 après rafraîchissement: '{text}'")
-                                                break
-                                        
-                                        if refreshed_site1_button:
-                                            cooldown_confirmed = self.check_cooldown_on_oneblock(refreshed_site1_button)
-                                        else:
-                                            logger.warning("⚠️ Bouton Site N°1 non trouvé après rafraîchissement")
-                                            cooldown_confirmed = False
-                                            
-                                    except Exception as e:
-                                        logger.warning(f"⚠️ Erreur lors du rafraîchissement: {e}")
-                                        cooldown_confirmed = False
-                                    
-                                    if cooldown_confirmed:
-                                        logger.info("✅ Cooldown confirmé sur oneblock.fr après rafraîchissement")
-                                    else:
-                                        logger.info("ℹ️ Cooldown non visible sur oneblock.fr mais vote validé sur serveur-prive.net")
-                                    
-                                    # Dans tous les cas, considérer comme succès si validé sur serveur-prive.net
-                                    return True
-                                else:
-                                    logger.warning("⚠️ Vote échoué sur serveur-prive.net")
-                                    return False
+                                # Vérifier le cooldown
+                                return self.check_cooldown_on_oneblock(site1_button)
                         break
                     
                     # Si pas de nouvel onglet, vérifier si le bouton change d'état
@@ -240,22 +175,13 @@ class MTCaptchaVoter:
             
             logger.info("🌐 Recherche du MTCaptcha sur la page de vote...")
             
-            # Attendre que la page se charge complètement
-            time.sleep(10)
-            logger.info(f"📍 URL après attente: {self.driver.current_url}")
-            
             # Chercher la sitekey MTCaptcha
             sitekey = None
             try:
                 # Chercher dans les scripts
                 scripts = self.driver.find_elements(By.TAG_NAME, "script")
-                logger.info(f"📊 Nombre de scripts trouvés: {len(scripts)}")
-                
-                for i, script in enumerate(scripts):
+                for script in scripts:
                     script_text = script.get_attribute('innerHTML') or ''
-                    if len(script_text) > 0:
-                        logger.info(f"🔍 Script {i+1}: {script_text[:100]}...")
-                    
                     if 'MTPublic-' in script_text:
                         import re
                         matches = re.findall(r'MTPublic-[a-zA-Z0-9]+', script_text)
@@ -266,38 +192,16 @@ class MTCaptchaVoter:
                 
                 if not sitekey:
                     # Chercher dans les attributs data
-                    logger.info("🔍 Recherche dans les attributs data...")
                     captcha_elements = self.driver.find_elements(By.CSS_SELECTOR, "[data-sitekey], [data-site-key]")
-                    logger.info(f"📊 Éléments avec data-sitekey trouvés: {len(captcha_elements)}")
-                    
                     for elem in captcha_elements:
                         potential_key = elem.get_attribute('data-sitekey') or elem.get_attribute('data-site-key')
-                        logger.info(f"🔍 Sitekey potentielle: {potential_key}")
                         if potential_key and 'MTPublic-' in potential_key:
                             sitekey = potential_key
                             logger.info(f"✅ Sitekey MTCaptcha trouvée dans attribut: {sitekey}")
                             break
                 
                 if not sitekey:
-                    # Debug: afficher le HTML de la page pour comprendre
-                    logger.info("🔍 Debug: Contenu de la page...")
-                    page_source = self.driver.page_source
-                    if 'MTPublic-' in page_source:
-                        logger.info("✅ MTPublic- trouvé dans le HTML")
-                        import re
-                        matches = re.findall(r'MTPublic-[a-zA-Z0-9]+', page_source)
-                        if matches:
-                            sitekey = matches[0]
-                            logger.info(f"✅ Sitekey MTCaptcha trouvée dans HTML: {sitekey}")
-                        else:
-                            logger.warning("⚠️ MTPublic- trouvé mais pas de match regex")
-                    else:
-                        logger.warning("⚠️ MTPublic- non trouvé dans le HTML")
-                        # Afficher les premiers 1000 caractères pour debug
-                        logger.info(f"🔍 Début du HTML: {page_source[:1000]}")
-                
-                if not sitekey:
-                    logger.error("❌ Sitekey MTCaptcha non trouvée après toutes les tentatives")
+                    logger.error("❌ Sitekey MTCaptcha non trouvée")
                     return False
                     
             except Exception as e:
@@ -342,75 +246,36 @@ class MTCaptchaVoter:
                 logger.info(f"📊 Données envoyées à 2Captcha: sitekey={sitekey}, pageurl={page_url}")
                 
                 response = requests.post('http://2captcha.com/in.php', data=submit_data, timeout=30)
-                
-                # Vérifier que la réponse est valide
-                if response.status_code != 200:
-                    logger.error(f"❌ Erreur HTTP 2Captcha: {response.status_code}")
-                    return False
-                
-                try:
-                    result = response.json()
-                except ValueError as e:
-                    logger.error(f"❌ Réponse 2Captcha invalide (pas JSON): {response.text}")
-                    return False
+                result = response.json()
                 
                 logger.info(f"📊 Réponse 2Captcha: {result}")
                 
-                if result.get('status') != 1:
-                    error_msg = result.get('request', 'Erreur inconnue')
-                    logger.error(f"❌ Erreur soumission 2Captcha: {error_msg}")
+                if result['status'] != 1:
+                    logger.error(f"❌ Erreur soumission 2Captcha: {result}")
                     return False
                 
                 captcha_id = result['request']
                 logger.info(f"🎯 Captcha soumis avec l'ID: {captcha_id}")
                 
                 # Attendre la résolution
-                solution = None
                 for attempt in range(30):
                     time.sleep(10)
                     
-                    try:
-                        check_response = requests.get(f'http://2captcha.com/res.php?key={self.api_key}&action=get&id={captcha_id}&json=1', timeout=30)
-                        
-                        if check_response.status_code != 200:
-                            logger.warning(f"⚠️ Erreur HTTP lors de la vérification: {check_response.status_code}")
-                            continue
-                        
-                        try:
-                            check_result = check_response.json()
-                        except ValueError:
-                            logger.warning(f"⚠️ Réponse non-JSON: {check_response.text}")
-                            continue
-                        
-                        logger.info(f"📊 Vérification captcha #{attempt+1}: {check_result}")
-                        
-                        if check_result.get('status') == 1:
-                            solution = check_result.get('request')
-                            if solution:
-                                logger.info("🎉 MTCaptcha résolu avec succès!")
-                                break
-                            else:
-                                logger.warning("⚠️ Solution vide reçue")
-                                continue
-                        elif check_result.get('error') == 'CAPCHA_NOT_READY':
-                            logger.info(f"⏳ Captcha en cours de résolution... (tentative {attempt+1}/30)")
-                            continue
-                        elif check_result.get('status') == 0 and check_result.get('error'):
-                            logger.error(f"❌ Erreur résolution captcha: {check_result['error']}")
-                            return False
-                        else:
-                            logger.warning(f"⚠️ Réponse inattendue: {check_result}")
-                            continue
-                            
-                    except requests.RequestException as e:
-                        logger.warning(f"⚠️ Erreur réseau lors de la vérification #{attempt+1}: {e}")
+                    check_response = requests.get(f'http://2captcha.com/res.php?key={self.api_key}&action=get&id={captcha_id}&json=1', timeout=30)
+                    check_result = check_response.json()
+                    
+                    if check_result['status'] == 1:
+                        solution = check_result['request']
+                        logger.info("🎉 MTCaptcha résolu avec succès!")
+                        break
+                    elif check_result['error'] == 'CAPCHA_NOT_READY':
+                        logger.info(f"⏳ Captcha en cours de résolution... (tentative {attempt+1}/30)")
                         continue
+                    else:
+                        logger.error(f"❌ Erreur résolution captcha: {check_result}")
+                        return False
                 else:
                     logger.error("❌ Timeout résolution captcha (5 minutes)")
-                    return False
-                
-                if not solution:
-                    logger.error("❌ Aucune solution reçue")
                     return False
                 
                 # Injecter la solution
