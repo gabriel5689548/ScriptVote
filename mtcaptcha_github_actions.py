@@ -175,7 +175,42 @@ class MTCaptchaVoter:
             
             # Attendre que la page se charge complètement
             logger.info("⏳ Attente du chargement complet de la page...")
-            time.sleep(5)
+            
+            # Gérer Cloudflare si présent
+            cloudflare_wait = 0
+            max_cloudflare_wait = 30
+            
+            while cloudflare_wait < max_cloudflare_wait:
+                current_title = self.driver.title
+                page_text = self.driver.find_element(By.TAG_NAME, "body").text.lower()
+                
+                logger.info(f"📄 Titre actuel: {current_title}")
+                logger.info(f"🔍 Contenu page (100 premiers chars): {page_text[:100]}...")
+                
+                # Vérifier si Cloudflare est toujours présent
+                if "just a moment" in current_title.lower() or "cloudflare" in page_text:
+                    logger.info(f"⏳ Cloudflare détecté, attente... ({cloudflare_wait}/{max_cloudflare_wait}s)")
+                    time.sleep(2)
+                    cloudflare_wait += 2
+                else:
+                    logger.info("✅ Page chargée (Cloudflare passé ou absent)")
+                    break
+            
+            if cloudflare_wait >= max_cloudflare_wait:
+                logger.error("❌ Timeout: Cloudflare n'a pas laissé passer après 30s")
+                # Sauvegarder un screenshot pour debug
+                try:
+                    import os
+                    os.makedirs("screenshots", exist_ok=True)
+                    screenshot_path = f"screenshots/cloudflare_block_{int(time.time())}.png"
+                    self.driver.save_screenshot(screenshot_path)
+                    logger.info(f"📸 Screenshot sauvegardé: {screenshot_path}")
+                except Exception as e:
+                    logger.warning(f"⚠️ Impossible de sauvegarder le screenshot: {e}")
+                return False
+            
+            # Attendre un peu plus pour que tous les éléments se chargent
+            time.sleep(3)
             
             logger.info("🌐 Recherche du MTCaptcha sur la page de vote...")
             
@@ -231,11 +266,42 @@ class MTCaptchaVoter:
                 
                 if not sitekey:
                     logger.error("❌ Sitekey MTCaptcha non trouvée")
-                    # Log some debug info
+                    # Log detailed debug info
                     logger.info("📄 Titre de la page: " + self.driver.title)
-                    # Check if Cloudflare is blocking
-                    if "cloudflare" in self.driver.page_source.lower() or "checking your browser" in self.driver.page_source.lower():
-                        logger.error("🛡️ Cloudflare détecté! La page est protégée.")
+                    logger.info("🌐 URL actuelle: " + self.driver.current_url)
+                    
+                    # Chercher des indices sur la page
+                    try:
+                        # Chercher tous les iframes
+                        iframes = self.driver.find_elements(By.TAG_NAME, "iframe")
+                        logger.info(f"🖼️ Nombre d'iframes trouvés: {len(iframes)}")
+                        for i, iframe in enumerate(iframes):
+                            logger.info(f"  - iframe {i}: src={iframe.get_attribute('src')}")
+                        
+                        # Chercher des éléments de captcha
+                        captcha_divs = self.driver.find_elements(By.CSS_SELECTOR, "div[class*='captcha'], div[id*='captcha']")
+                        logger.info(f"🔍 Éléments captcha trouvés: {len(captcha_divs)}")
+                        
+                        # Afficher un extrait du HTML
+                        body_html = self.driver.find_element(By.TAG_NAME, "body").get_attribute('innerHTML')
+                        if len(body_html) > 500:
+                            logger.info(f"📜 Début du HTML body: {body_html[:500]}...")
+                        else:
+                            logger.info(f"📜 HTML body complet: {body_html}")
+                            
+                    except Exception as debug_error:
+                        logger.warning(f"⚠️ Erreur pendant le debug: {debug_error}")
+                    
+                    # Sauvegarder un screenshot
+                    try:
+                        import os
+                        os.makedirs("screenshots", exist_ok=True)
+                        screenshot_path = f"screenshots/no_captcha_{int(time.time())}.png"
+                        self.driver.save_screenshot(screenshot_path)
+                        logger.info(f"📸 Screenshot sauvegardé: {screenshot_path}")
+                    except Exception as e:
+                        logger.warning(f"⚠️ Impossible de sauvegarder le screenshot: {e}")
+                    
                     return False
                     
             except Exception as e:
