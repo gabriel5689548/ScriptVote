@@ -3,7 +3,7 @@
 set -e
 
 REPO_URL="https://github.com/YOUR_USERNAME/ScriptVote.git"
-BRANCH="main"
+BRANCH="Test2"
 PROJECT_DIR="/home/azureuser/ScriptVote"
 
 echo "🚀 Déploiement du projet ScriptVote"
@@ -28,7 +28,7 @@ fi
 
 echo "🔧 Configuration de l'environnement..."
 if [ ! -d "venv" ]; then
-    python3.9 -m venv venv
+    python3 -m venv venv
 fi
 
 source venv/bin/activate

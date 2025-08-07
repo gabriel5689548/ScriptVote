@@ -10,9 +10,9 @@ sudo apt-get upgrade -y
 
 echo "📦 Installation des dépendances système..."
 sudo apt-get install -y \
-    python3.9 \
+    python3 \
     python3-pip \
-    python3.9-venv \
+    python3-venv \
     git \
     wget \
     curl \
@@ -54,7 +54,7 @@ mkdir -p ScriptVote/screenshots
 
 echo "🐍 Configuration de l'environnement Python..."
 cd ScriptVote
-python3.9 -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 
 echo "📚 Installation des dépendances Python..."
