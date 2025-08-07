@@ -1,7 +1,10 @@
 # GitHub Actions Vote Automation Dependencies
 selenium==4.15.2
+seleniumbase==4.34.7
+undetected-chromedriver==3.6.0
 requests==2.31.0
 python-dotenv==1.0.0
+pyvirtualdisplay==3.0
 
 # Optionnel: Pour de meilleures performances
 urllib3==2.0.7
