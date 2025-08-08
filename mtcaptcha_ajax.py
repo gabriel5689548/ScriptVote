@@ -17,7 +17,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-class MTCaptchaVoterSeleniumBase:
+class MTCaptchaVoterAjax:
     def __init__(self, headless=True, timeout=120):
         self.timeout = timeout
         self.api_key = os.getenv('TWOCAPTCHA_API_KEY') or os.getenv('api_key')
@@ -396,7 +396,7 @@ class MTCaptchaVoterSeleniumBase:
 
 def main():
     parser = argparse.ArgumentParser(description='Script de vote avec requête AJAX')
-    parser.add_argument('--headless', action='store_true', default=True, help='Mode headless')
+    parser.add_argument('--headless', action='store_true', default=False, help='Mode headless')
     parser.add_argument('--timeout', type=int, default=120, help='Timeout en secondes')
     
     args = parser.parse_args()
@@ -405,7 +405,7 @@ def main():
     logger.info(f"Mode headless: {args.headless}")
     
     try:
-        voter = MTCaptchaVoterSeleniumBase(headless=args.headless, timeout=args.timeout)
+        voter = MTCaptchaVoterAjax(headless=args.headless, timeout=args.timeout)
         success = voter.vote_oneblock_site1()
         
         if success:
