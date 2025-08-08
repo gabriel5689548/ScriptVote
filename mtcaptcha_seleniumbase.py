@@ -102,10 +102,17 @@ class MTCaptchaVoterSeleniumBase:
                 buttons = sb.find_elements("button")
                 for btn in buttons:
                     if "ENVOYER" in btn.text.upper() and btn.is_displayed():
-                        sb.execute_script("arguments[0].scrollIntoView(true);", btn)
-                        time.sleep(1)
-                        sb.execute_script("arguments[0].click();", btn)
-                        logger.info("✅ Clic sur bouton 'ENVOYER'")
+                        try:
+                            # Essayer un clic normal d'abord
+                            btn.click()
+                            logger.info("✅ Clic sur bouton 'ENVOYER'")
+                        except:
+                            # Si ça échoue, utiliser JavaScript sans scroll
+                            try:
+                                sb.execute_script("arguments[0].click();", btn)
+                                logger.info("✅ Clic sur bouton 'ENVOYER' (JS)")
+                            except:
+                                logger.warning("⚠️ Impossible de cliquer sur ENVOYER")
                         time.sleep(5)
                         break
                 
@@ -136,13 +143,16 @@ class MTCaptchaVoterSeleniumBase:
                         initial_tabs = len(sb.driver.window_handles)
                         current_handle = sb.driver.current_window_handle
                         
-                        sb.driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", button)
-                        time.sleep(1)
+                        # Clic simple sans scroll en headless
                         try:
                             button.click()
+                            logger.info("✅ Clic sur SITE N°1")
                         except:
-                            sb.driver.execute_script("arguments[0].click();", button)
-                        logger.info("✅ Clic sur SITE N°1")
+                            try:
+                                sb.driver.execute_script("arguments[0].click();", button)
+                                logger.info("✅ Clic sur SITE N°1 (JS)")
+                            except Exception as e:
+                                logger.warning(f"⚠️ Erreur clic SITE N°1: {e}")
                         site1_clicked = True
                         
                         time.sleep(3)
