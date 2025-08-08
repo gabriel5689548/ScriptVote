@@ -27,19 +27,32 @@ class MTCaptchaVoterSeleniumBase:
             raise ValueError("❌ API key non trouvée dans .env ! Ajoutez: TWOCAPTCHA_API_KEY=votre_clé")
         
         # Configuration SeleniumBase
-        self.sb_options = {
-            'uc': True,  # Mode UndetectedChromedriver
-            'headless': headless,
-            'disable_csp': True,
-            'disable_ws': True,
-            'page_load_strategy': 'eager',
-            'block_images': False,
-        }
-        
-        # Si on est sur Linux, utiliser xvfb
-        if sys.platform.startswith('linux') and headless:
-            self.sb_options['xvfb'] = True
-            logger.info("🖥️ Mode xvfb activé pour Linux headless")
+        if headless:
+            # Configuration spéciale pour headless
+            self.sb_options = {
+                'uc': False,  # Désactiver UC en headless
+                'headless2': True,  # Utiliser le nouveau mode headless de Chrome
+                'disable_csp': True,
+                'disable_ws': True,
+                'page_load_strategy': 'normal',  # Mode normal en headless
+                'block_images': False,
+                'chromium_arg': '--disable-blink-features=AutomationControlled,--no-sandbox,--disable-dev-shm-usage',
+            }
+            
+            # Sur Linux uniquement, utiliser xvfb
+            if sys.platform.startswith('linux'):
+                self.sb_options['xvfb'] = True
+                logger.info("🖥️ Mode xvfb activé pour Linux headless")
+        else:
+            # Configuration normale avec UC
+            self.sb_options = {
+                'uc': True,
+                'headless': False,
+                'disable_csp': True,
+                'disable_ws': True,
+                'page_load_strategy': 'eager',
+                'block_images': False,
+            }
         
         logger.info("🔧 Configuration SeleniumBase avec UC mode...")
     
@@ -54,7 +67,12 @@ class MTCaptchaVoterSeleniumBase:
                 logger.info("✅ Driver SeleniumBase UC configuré")
                 
                 logger.info(f"🌐 Étape 1: Accès à {url}")
-                sb.uc_open_with_reconnect(url, reconnect_time=4)
+                # En headless ou sans UC, utiliser open normal
+                if self.sb_options.get('headless2') or not self.sb_options.get('uc'):
+                    sb.open(url)
+                    time.sleep(3)  # Attendre le chargement
+                else:
+                    sb.uc_open_with_reconnect(url, reconnect_time=4)
                 sb.wait_for_element_visible("body", timeout=10)
                 
                 # Gérer les cookies
@@ -101,10 +119,17 @@ class MTCaptchaVoterSeleniumBase:
                 for button in buttons:
                     text = button.text.strip()
                     if "SITE N°1" in text:
-                        # Vérifier si on est en cooldown
+                        # Vérifier si on est en cooldown (format: "SITE N°1\n00h 00min 00s")
                         button_text_lower = text.lower()
-                        if "cooldown" in button_text_lower or "attendre" in button_text_lower or "wait" in button_text_lower or "prochain" in button_text_lower:
-                            logger.info(f"⏰ COOLDOWN DÉTECTÉ: {text}")
+                        # Détecter le format de temps comme "01h 18min 35s"
+                        import re
+                        time_pattern = r'\d+h\s*\d+min\s*\d+s'
+                        if (re.search(time_pattern, text) or 
+                            "cooldown" in button_text_lower or 
+                            "attendre" in button_text_lower or 
+                            "wait" in button_text_lower or 
+                            "prochain" in button_text_lower):
+                            logger.info(f"⏰ COOLDOWN DÉTECTÉ: {text.replace(chr(10), ' ')}")
                             logger.info("✅ Le vote précédent a bien fonctionné! Cooldown actif.")
                             return True  # Succès car cooldown = vote passé
                         
