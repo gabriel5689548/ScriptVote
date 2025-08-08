@@ -57,29 +57,33 @@ class MTCaptchaVoterSeleniumBase:
         
         logger.info("🔧 Configuration SeleniumBase avec UC mode...")
     
-    def vote_oneblock_site1(self):
+    def vote_oneblock_site1(self, url=None):
         """Vote pour le SITE N°1 sur oneblock.fr avec SeleniumBase UC mode"""
+        
+        if not url:
+            url = "https://oneblock.fr/vote"
         
         try:
             with SB(**self.sb_options) as sb:
                 logger.info("✅ Driver SeleniumBase UC configuré avec succès")
                 
-                logger.info("🎯 Démarrage du processus de vote sur oneblock.fr")
-                logger.info("🌐 Étape 1: Accès à https://oneblock.fr/vote")
+                logger.info("🎯 Démarrage du processus de vote")
+                logger.info(f"🌐 Étape 1: Accès à {url}")
                 
                 # Utiliser uc_open_with_reconnect pour contourner la détection initiale
-                sb.uc_open_with_reconnect("https://oneblock.fr/vote", reconnect_time=4)
+                sb.uc_open_with_reconnect(url, reconnect_time=4)
                 
                 # Attendre que la page se charge
                 sb.wait_for_element_visible("body", timeout=10)
                 
                 # Remplir le pseudonyme
                 try:
-                    # Chercher le champ username
+                    # Chercher le champ username - utiliser i pour case-insensitive
                     username_selectors = [
-                        "input[placeholder*='pseudo']",
-                        "input[name*='username']", 
-                        "input[id*='username']"
+                        "input[placeholder*='pseudo' i]",
+                        "input[name*='username' i]", 
+                        "input[id*='username' i]",
+                        "input[type='text']"
                     ]
                     
                     username_field = None
@@ -100,11 +104,30 @@ class MTCaptchaVoterSeleniumBase:
                 
                 # Cliquer sur ENVOYER
                 try:
-                    # Chercher le bouton ENVOYER
-                    if sb.is_text_visible("ENVOYER"):
-                        sb.click("button:contains('ENVOYER')")
-                        logger.info("✅ Clic sur bouton 'ENVOYER'")
-                        time.sleep(3)
+                    # Chercher le bouton ENVOYER par plusieurs méthodes
+                    envoyer_clicked = False
+                    
+                    # Méthode 1: Chercher tous les boutons et trouver ENVOYER
+                    buttons = sb.find_elements("button")
+                    for btn in buttons:
+                        if "ENVOYER" in btn.text.upper() and btn.is_displayed():
+                            logger.info(f"🎯 Bouton ENVOYER trouvé: '{btn.text}'")
+                            try:
+                                # Scroll vers le bouton
+                                sb.execute_script("arguments[0].scrollIntoView(true);", btn)
+                                time.sleep(1)
+                                # Clic JavaScript pour éviter les problèmes
+                                sb.execute_script("arguments[0].click();", btn)
+                                logger.info("✅ Clic sur bouton 'ENVOYER' réussi")
+                                envoyer_clicked = True
+                                time.sleep(3)
+                                break
+                            except Exception as e:
+                                logger.warning(f"⚠️ Erreur clic direct: {e}")
+                    
+                    if not envoyer_clicked:
+                        logger.warning("⚠️ Bouton ENVOYER non trouvé ou non cliquable")
+                        
                 except Exception as e:
                     logger.warning(f"⚠️ Erreur clic ENVOYER: {str(e)}")
                 
