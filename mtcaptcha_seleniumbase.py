@@ -76,6 +76,15 @@ class MTCaptchaVoterSeleniumBase:
                 # Attendre que la page se charge
                 sb.wait_for_element_visible("body", timeout=10)
                 
+                # Gérer les cookies si présents
+                try:
+                    if sb.is_element_visible("button:contains('J'accepte')"):
+                        sb.click("button:contains('J'accepte')")
+                        logger.info("✅ Cookies acceptés")
+                        time.sleep(2)
+                except:
+                    pass
+                
                 # Remplir le pseudonyme
                 try:
                     # Chercher le champ username - utiliser i pour case-insensitive
@@ -120,7 +129,7 @@ class MTCaptchaVoterSeleniumBase:
                                 sb.execute_script("arguments[0].click();", btn)
                                 logger.info("✅ Clic sur bouton 'ENVOYER' réussi")
                                 envoyer_clicked = True
-                                time.sleep(3)
+                                time.sleep(5)  # Plus de temps pour que la page se charge
                                 break
                             except Exception as e:
                                 logger.warning(f"⚠️ Erreur clic direct: {e}")
@@ -135,8 +144,12 @@ class MTCaptchaVoterSeleniumBase:
                 logger.info("🔍 Recherche du bouton SITE N°1...")
                 
                 try:
-                    # Attendre que les boutons de vote apparaissent
-                    sb.wait_for_element_visible("button", timeout=10)
+                    # Attendre que la page se mette à jour après ENVOYER
+                    logger.info("⏳ Attente de l'apparition des boutons de vote...")
+                    time.sleep(5)
+                    
+                    # Ne pas utiliser wait_for_element car ça peut bloquer
+                    # Juste chercher les boutons directement
                     
                     # Chercher le bouton SITE N°1
                     site1_clicked = False
@@ -144,7 +157,7 @@ class MTCaptchaVoterSeleniumBase:
                     
                     for button in buttons:
                         text = button.text.strip()
-                        if "SITE N°1" in text and "Votez maintenant" in text:
+                        if "SITE N°1" in text:
                             # Mémoriser le nombre d'onglets
                             initial_tabs = len(sb.driver.window_handles)
                             current_handle = sb.driver.current_window_handle
