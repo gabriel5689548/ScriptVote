@@ -126,12 +126,26 @@ class MTCaptchaVoterSeleniumBase:
                 for button in buttons:
                     text = button.text.strip()
                     if "SITE N°1" in text:
-                        # Vérifier si on est en cooldown (format: "SITE N°1\n00h 00min 00s")
+                        logger.info(f"📋 Bouton SITE N°1 trouvé avec texte: '{text.replace(chr(10), ' ')}'")
+                        
+                        # Vérifier si on est en cooldown (formats: "00h 00min 00s" ou "49min 13s" ou "5s")
                         button_text_lower = text.lower()
-                        # Détecter le format de temps comme "01h 18min 35s"
+                        # Détecter différents formats de temps
                         import re
-                        time_pattern = r'\d+h\s*\d+min\s*\d+s'
-                        if (re.search(time_pattern, text) or 
+                        # Patterns pour: "1h 30min 45s", "49min 13s", "5s"
+                        time_patterns = [
+                            r'\d+h\s*\d+min\s*\d+s',  # Format complet avec heures
+                            r'\d+min\s*\d+s',          # Format minutes et secondes
+                            r'\d+s'                    # Format secondes seules
+                        ]
+                        
+                        has_cooldown = False
+                        for pattern in time_patterns:
+                            if re.search(pattern, text):
+                                has_cooldown = True
+                                break
+                        
+                        if (has_cooldown or 
                             "cooldown" in button_text_lower or 
                             "attendre" in button_text_lower or 
                             "wait" in button_text_lower or 
@@ -159,6 +173,7 @@ class MTCaptchaVoterSeleniumBase:
                         
                         # Gérer le nouvel onglet ou redirection
                         if len(sb.driver.window_handles) > initial_tabs:
+                            logger.info(f"📑 Nouvel onglet détecté ({len(sb.driver.window_handles)} onglets)")
                             for handle in sb.driver.window_handles:
                                 if handle != current_handle:
                                     sb.switch_to_window(handle)
@@ -168,10 +183,13 @@ class MTCaptchaVoterSeleniumBase:
                                     sb.switch_to_window(current_handle)
                                     return vote_success
                         else:
+                            logger.info(f"📍 Pas de nouvel onglet, URL actuelle: {sb.get_current_url()}")
                             current_url = sb.get_current_url()
                             if "serveur-prive.net" in current_url:
-                                logger.info("📍 Redirection vers serveur-prive.net")
+                                logger.info("📍 Redirection vers serveur-prive.net détectée")
                                 return self.continue_vote_on_serveur_prive(sb)
+                            else:
+                                logger.warning(f"⚠️ Pas de redirection vers serveur-prive.net")
                         break
                 
                 if not site1_clicked:
